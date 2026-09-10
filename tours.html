@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Wanderly Tours | Explore Amazing Tours</title>
+    <title>Travel With Labib | Explore Amazing Tours</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,12 +20,22 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
+        :root {
+            --brand: #B85C4A;
+            --brand-dark: #96483A;
+            --brand-light: #E8A493;
+            --brand-soft: #F3DED8;
+            --cream: #FBF7F2;
+            --gold: #C99532;
+        }
+
         * {
             scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', sans-serif;
+            background: var(--cream);
         }
 
         .navbar {
@@ -40,7 +50,10 @@
         .hero {
             min-height: 500px;
             background:
-                linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
+                linear-gradient(
+                    rgba(31, 24, 21, 0.45),
+                    rgba(31, 24, 21, 0.58)
+                ),
                 url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000&q=85")
                 center/cover no-repeat;
         }
@@ -51,7 +64,7 @@
 
         .tour-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 45px rgba(60, 40, 30, 0.13);
         }
 
         .tour-image {
@@ -67,9 +80,15 @@
         }
 
         .filter-btn.active {
-            background: #2563eb;
+            background: var(--brand);
             color: white;
-            border-color: #2563eb;
+            border-color: var(--brand);
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: var(--brand);
+            color: var(--brand);
+            background: #fff8f5;
         }
 
         .modal {
@@ -103,10 +122,27 @@
         #backTop {
             transition: all 0.3s ease;
         }
+
+        .brand-text {
+            color: var(--brand);
+        }
+
+        .brand-bg {
+            background: var(--brand);
+        }
+
+        .brand-bg:hover {
+            background: var(--brand-dark);
+        }
+
+        .brand-focus:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 3px rgba(184, 92, 74, 0.14);
+        }
     </style>
 </head>
 
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-[#FBF7F2] text-stone-800">
 
 <!-- =====================================================
      NAVBAR
@@ -120,7 +156,7 @@
 
             <!-- Logo -->
             <a href="index.html"
-               class="flex items-center gap-2 text-2xl font-extrabold text-blue-600">
+               class="flex items-center gap-2 text-2xl font-extrabold brand-text">
 
                 <i class="fa-solid fa-earth-americas"></i>
 
@@ -131,32 +167,32 @@
             <div class="hidden lg:flex items-center gap-8">
 
                 <a href="index.html"
-                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                   class="text-gray-600 hover:text-[#B85C4A] font-medium transition">
                     Home
                 </a>
 
                 <a href="destinations.html"
-                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                   class="text-gray-600 hover:text-[#B85C4A] font-medium transition">
                     Destinations
                 </a>
 
                 <a href="tours.html"
-                   class="text-blue-600 font-semibold">
+                   class="text-[#B85C4A] font-semibold">
                     Tours
                 </a>
 
                 <a href="about.html"
-                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                   class="text-gray-600 hover:text-[#B85C4A] font-medium transition">
                     About
                 </a>
 
                 <a href="contact.html"
-                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                   class="text-gray-600 hover:text-[#B85C4A] font-medium transition">
                     Contact
                 </a>
 
                 <a href="contact.html"
-                   class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-full font-semibold transition">
+                   class="bg-[#B85C4A] hover:bg-[#96483A] text-white px-5 py-3 rounded-full font-semibold transition">
                     Contact Us
                 </a>
 
@@ -180,27 +216,27 @@
             <div class="flex flex-col gap-4">
 
                 <a href="index.html"
-                   class="py-2 hover:text-blue-600">
+                   class="py-2 hover:text-[#B85C4A]">
                     Home
                 </a>
 
                 <a href="destinations.html"
-                   class="py-2 hover:text-blue-600">
+                   class="py-2 hover:text-[#B85C4A]">
                     Destinations
                 </a>
 
                 <a href="tours.html"
-                   class="py-2 text-blue-600 font-semibold">
+                   class="py-2 text-[#B85C4A] font-semibold">
                     Tours
                 </a>
 
                 <a href="about.html"
-                   class="py-2 hover:text-blue-600">
+                   class="py-2 hover:text-[#B85C4A]">
                     About
                 </a>
 
                 <a href="contact.html"
-                   class="py-2 hover:text-blue-600">
+                   class="py-2 hover:text-[#B85C4A]">
                     Contact
                 </a>
 
@@ -219,9 +255,12 @@
 
     <div class="max-w-4xl px-5">
 
-        <span class="inline-block bg-white/20 backdrop-blur-md px-5 py-2 rounded-full text-sm font-semibold mb-6">
+        <span class="inline-block bg-[#B85C4A]/80 backdrop-blur-sm
+                     px-5 py-2 rounded-full text-sm font-semibold mb-6">
+
             <i class="fa-solid fa-compass mr-2"></i>
             Discover Your Next Adventure
+
         </span>
 
         <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
@@ -251,15 +290,17 @@
 
             <div class="relative">
 
-                <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <i class="fa-solid fa-magnifying-glass
+                          absolute left-5 top-1/2
+                          -translate-y-1/2 text-gray-400"></i>
 
                 <input
                     type="text"
                     id="tourSearch"
                     placeholder="Search tours..."
-                    class="w-full pl-14 pr-5 py-4 rounded-2xl border border-gray-200
-                           focus:outline-none focus:ring-2 focus:ring-blue-500
-                           shadow-sm"
+                    class="brand-focus w-full pl-14 pr-5 py-4 rounded-2xl
+                           border border-gray-200 focus:outline-none
+                           shadow-sm transition"
                 >
 
             </div>
@@ -271,31 +312,36 @@
         <div class="flex flex-wrap justify-center gap-3">
 
             <button
-                class="filter-btn active border border-gray-300 px-5 py-2.5 rounded-full font-medium"
+                class="filter-btn active border border-gray-300
+                       px-5 py-2.5 rounded-full font-medium"
                 data-category="all">
                 All Tours
             </button>
 
             <button
-                class="filter-btn border border-gray-300 px-5 py-2.5 rounded-full font-medium"
+                class="filter-btn border border-gray-300
+                       px-5 py-2.5 rounded-full font-medium"
                 data-category="adventure">
                 Adventure
             </button>
 
             <button
-                class="filter-btn border border-gray-300 px-5 py-2.5 rounded-full font-medium"
+                class="filter-btn border border-gray-300
+                       px-5 py-2.5 rounded-full font-medium"
                 data-category="beach">
                 Beach
             </button>
 
             <button
-                class="filter-btn border border-gray-300 px-5 py-2.5 rounded-full font-medium"
+                class="filter-btn border border-gray-300
+                       px-5 py-2.5 rounded-full font-medium"
                 data-category="city">
                 City
             </button>
 
             <button
-                class="filter-btn border border-gray-300 px-5 py-2.5 rounded-full font-medium"
+                class="filter-btn border border-gray-300
+                       px-5 py-2.5 rounded-full font-medium"
                 data-category="nature">
                 Nature
             </button>
@@ -318,7 +364,8 @@
         <!-- Heading -->
         <div class="text-center mb-12">
 
-            <span class="text-blue-600 font-bold uppercase tracking-wider text-sm">
+            <span class="text-[#B85C4A] font-bold uppercase
+                         tracking-wider text-sm">
                 Popular Experiences
             </span>
 
@@ -351,13 +398,17 @@
                         alt="Swiss Alps"
                         class="tour-image w-full h-full object-cover">
 
-                    <span class="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                    <span class="absolute top-4 left-4 bg-[#B85C4A]
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
                         Adventure
                     </span>
 
                     <button
-                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
-                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
                         aria-label="Add to favorites">
 
                         <i class="fa-regular fa-heart"></i>
@@ -369,7 +420,7 @@
                 <div class="p-6">
 
                     <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
                         Switzerland
                     </div>
 
@@ -395,13 +446,17 @@
 
                         <div>
                             <span class="text-sm text-gray-500">From</span>
-                            <p class="text-2xl font-extrabold text-blue-600">
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
                                 $1,299
                             </p>
                         </div>
 
                         <button
-                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
                             data-tour="Swiss Alps Adventure">
 
                             Book Now
@@ -427,13 +482,17 @@
                         alt="Bali"
                         class="tour-image w-full h-full object-cover">
 
-                    <span class="absolute top-4 left-4 bg-cyan-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                    <span class="absolute top-4 left-4 bg-[#D9A441]
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
                         Beach
                     </span>
 
                     <button
-                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
-                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
                         aria-label="Add to favorites">
 
                         <i class="fa-regular fa-heart"></i>
@@ -445,7 +504,7 @@
                 <div class="p-6">
 
                     <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
                         Bali, Indonesia
                     </div>
 
@@ -471,13 +530,17 @@
 
                         <div>
                             <span class="text-sm text-gray-500">From</span>
-                            <p class="text-2xl font-extrabold text-blue-600">
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
                                 $799
                             </p>
                         </div>
 
                         <button
-                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
                             data-tour="Bali Paradise Escape">
 
                             Book Now
@@ -503,13 +566,17 @@
                         alt="Dubai"
                         class="tour-image w-full h-full object-cover">
 
-                    <span class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                    <span class="absolute top-4 left-4 bg-stone-700
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
                         City
                     </span>
 
                     <button
-                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
-                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
                         aria-label="Add to favorites">
 
                         <i class="fa-regular fa-heart"></i>
@@ -521,7 +588,7 @@
                 <div class="p-6">
 
                     <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
                         Dubai, UAE
                     </div>
 
@@ -547,13 +614,17 @@
 
                         <div>
                             <span class="text-sm text-gray-500">From</span>
-                            <p class="text-2xl font-extrabold text-blue-600">
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
                                 $999
                             </p>
                         </div>
 
                         <button
-                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
                             data-tour="Dubai Luxury Tour">
 
                             Book Now
@@ -579,13 +650,17 @@
                         alt="Nepal Mountains"
                         class="tour-image w-full h-full object-cover">
 
-                    <span class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                    <span class="absolute top-4 left-4 bg-[#66755A]
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
                         Nature
                     </span>
 
                     <button
-                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
-                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
                         aria-label="Add to favorites">
 
                         <i class="fa-regular fa-heart"></i>
@@ -597,7 +672,7 @@
                 <div class="p-6">
 
                     <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
                         Nepal
                     </div>
 
@@ -623,13 +698,17 @@
 
                         <div>
                             <span class="text-sm text-gray-500">From</span>
-                            <p class="text-2xl font-extrabold text-blue-600">
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
                                 $1,099
                             </p>
                         </div>
 
                         <button
-                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
                             data-tour="Nepal Mountain Trek">
 
                             Book Now
@@ -655,13 +734,17 @@
                         alt="Paris"
                         class="tour-image w-full h-full object-cover">
 
-                    <span class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                    <span class="absolute top-4 left-4 bg-stone-700
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
                         City
                     </span>
 
                     <button
-                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
-                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
                         aria-label="Add to favorites">
 
                         <i class="fa-regular fa-heart"></i>
@@ -673,7 +756,7 @@
                 <div class="p-6">
 
                     <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
                         Paris, France
                     </div>
 
@@ -699,13 +782,17 @@
 
                         <div>
                             <span class="text-sm text-gray-500">From</span>
-                            <p class="text-2xl font-extrabold text-blue-600">
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
                                 $1,199
                             </p>
                         </div>
 
                         <button
-                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
                             data-tour="Paris City Experience">
 
                             Book Now
@@ -731,13 +818,17 @@
                         alt="Maldives"
                         class="tour-image w-full h-full object-cover">
 
-                    <span class="absolute top-4 left-4 bg-cyan-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                    <span class="absolute top-4 left-4 bg-[#D9A441]
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
                         Beach
                     </span>
 
                     <button
-                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
-                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
                         aria-label="Add to favorites">
 
                         <i class="fa-regular fa-heart"></i>
@@ -749,7 +840,7 @@
                 <div class="p-6">
 
                     <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
                         Maldives
                     </div>
 
@@ -775,13 +866,17 @@
 
                         <div>
                             <span class="text-sm text-gray-500">From</span>
-                            <p class="text-2xl font-extrabold text-blue-600">
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
                                 $1,499
                             </p>
                         </div>
 
                         <button
-                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
                             data-tour="Maldives Island Escape">
 
                             Book Now
@@ -824,7 +919,7 @@
      CTA
 ===================================================== -->
 
-<section class="py-20 bg-blue-600 text-white">
+<section class="py-20 bg-[#B85C4A] text-white">
 
     <div class="max-w-5xl mx-auto px-5 text-center">
 
@@ -834,16 +929,18 @@
             Ready For Your Next Adventure?
         </h2>
 
-        <p class="text-blue-100 max-w-2xl mx-auto mb-8">
+        <p class="text-[#F4D5CD] max-w-2xl mx-auto mb-8">
             Let us help you plan the perfect journey.
             Your unforgettable adventure starts here.
         </p>
 
         <a href="contact.html"
-           class="inline-flex items-center gap-2 bg-white text-blue-600
-                  px-7 py-3.5 rounded-full font-bold hover:bg-gray-100 transition">
+           class="inline-flex items-center gap-2 bg-white
+                  text-[#B85C4A] px-7 py-3.5 rounded-full
+                  font-bold hover:bg-[#FFF5F1] transition">
 
             Plan My Trip
+
             <i class="fa-solid fa-arrow-right"></i>
 
         </a>
@@ -857,7 +954,7 @@
      FOOTER
 ===================================================== -->
 
-<footer class="bg-gray-950 text-gray-300">
+<footer class="bg-stone-950 text-gray-300">
 
     <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14">
 
@@ -866,9 +963,11 @@
             <!-- Brand -->
             <div>
 
-                <div class="flex items-center gap-2 text-2xl font-extrabold text-white mb-5">
+                <div class="flex items-center gap-2 text-2xl
+                            font-extrabold text-white mb-5">
 
-                    <i class="fa-solid fa-earth-americas"></i>
+                    <i class="fa-solid fa-earth-americas text-[#B85C4A]"></i>
+
                     Travel With Labib
 
                 </div>
@@ -890,23 +989,28 @@
 
                 <div class="space-y-3">
 
-                    <a href="index.html" class="block hover:text-white transition">
+                    <a href="index.html"
+                       class="block hover:text-[#E8A493] transition">
                         Home
                     </a>
 
-                    <a href="destinations.html" class="block hover:text-white transition">
+                    <a href="destinations.html"
+                       class="block hover:text-[#E8A493] transition">
                         Destinations
                     </a>
 
-                    <a href="tours.html" class="block hover:text-white transition">
+                    <a href="tours.html"
+                       class="block hover:text-[#E8A493] transition">
                         Tours
                     </a>
 
-                    <a href="about.html" class="block hover:text-white transition">
+                    <a href="about.html"
+                       class="block hover:text-[#E8A493] transition">
                         About
                     </a>
 
-                    <a href="contact.html" class="block hover:text-white transition">
+                    <a href="contact.html"
+                       class="block hover:text-[#E8A493] transition">
                         Contact
                     </a>
 
@@ -947,7 +1051,7 @@
                     <a href="#"
                        class="w-11 h-11 rounded-full bg-gray-800
                               flex items-center justify-center
-                              hover:bg-blue-600 transition">
+                              hover:bg-[#B85C4A] transition">
 
                         <i class="fa-brands fa-facebook-f"></i>
 
@@ -956,7 +1060,7 @@
                     <a href="#"
                        class="w-11 h-11 rounded-full bg-gray-800
                               flex items-center justify-center
-                              hover:bg-pink-600 transition">
+                              hover:bg-[#B85C4A] transition">
 
                         <i class="fa-brands fa-instagram"></i>
 
@@ -965,7 +1069,7 @@
                     <a href="#"
                        class="w-11 h-11 rounded-full bg-gray-800
                               flex items-center justify-center
-                              hover:bg-sky-500 transition">
+                              hover:bg-[#B85C4A] transition">
 
                         <i class="fa-brands fa-twitter"></i>
 
@@ -978,9 +1082,10 @@
         </div>
 
 
-        <div class="border-t border-gray-800 mt-12 pt-7 text-center text-gray-500">
+        <div class="border-t border-gray-800 mt-12 pt-7
+                    text-center text-gray-500">
 
-            © 2026 Travel With Labib All rights reserved.
+            © 2026 Travel With Labib. All rights reserved.
 
         </div>
 
@@ -994,8 +1099,8 @@
 ===================================================== -->
 
 <div id="bookingModal"
-     class="modal hidden fixed inset-0 z-[100] bg-black/60
-            flex items-center justify-center p-5">
+     class="modal hidden fixed inset-0 z-[100]
+            bg-black/60 flex items-center justify-center p-5">
 
     <div class="modal-content bg-white rounded-3xl w-full max-w-lg
                 max-h-[90vh] overflow-y-auto">
@@ -1005,7 +1110,7 @@
 
             <div>
 
-                <span class="text-sm text-blue-600 font-semibold">
+                <span class="text-sm text-[#B85C4A] font-semibold">
                     Tour Booking
                 </span>
 
@@ -1045,8 +1150,8 @@
                     type="text"
                     required
                     placeholder="Enter your name"
-                    class="w-full px-4 py-3 border rounded-xl
-                           focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    class="brand-focus w-full px-4 py-3 border
+                           rounded-xl focus:outline-none transition">
 
             </div>
 
@@ -1062,8 +1167,8 @@
                     type="email"
                     required
                     placeholder="Enter your email"
-                    class="w-full px-4 py-3 border rounded-xl
-                           focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    class="brand-focus w-full px-4 py-3 border
+                           rounded-xl focus:outline-none transition">
 
             </div>
 
@@ -1080,8 +1185,8 @@
                         id="travelDate"
                         type="date"
                         required
-                        class="w-full px-4 py-3 border rounded-xl
-                               focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="brand-focus w-full px-4 py-3 border
+                               rounded-xl focus:outline-none transition">
 
                 </div>
 
@@ -1099,8 +1204,8 @@
                         max="20"
                         value="1"
                         required
-                        class="w-full px-4 py-3 border rounded-xl
-                               focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="brand-focus w-full px-4 py-3 border
+                               rounded-xl focus:outline-none transition">
 
                 </div>
 
@@ -1117,18 +1222,19 @@
                     id="specialRequest"
                     rows="3"
                     placeholder="Any special request?"
-                    class="w-full px-4 py-3 border rounded-xl
-                           focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    class="brand-focus w-full px-4 py-3 border
+                           rounded-xl focus:outline-none transition"></textarea>
 
             </div>
 
 
             <button
                 type="submit"
-                class="w-full bg-blue-600 hover:bg-blue-700
+                class="w-full bg-[#B85C4A] hover:bg-[#96483A]
                        text-white py-4 rounded-xl font-bold transition">
 
                 <i class="fa-solid fa-paper-plane mr-2"></i>
+
                 Submit Booking Request
 
             </button>
@@ -1153,14 +1259,15 @@
             </h3>
 
             <p class="text-gray-500 mt-3">
-                Thank you for choosing Wanderly.
+                Thank you for choosing Travel With Labib.
                 We will contact you shortly.
             </p>
 
             <button
                 id="successCloseBtn"
-                class="mt-6 bg-blue-600 text-white px-6 py-3
-                       rounded-xl font-semibold">
+                class="mt-6 bg-[#B85C4A] hover:bg-[#96483A]
+                       text-white px-6 py-3 rounded-xl
+                       font-semibold transition">
 
                 Done
 
@@ -1179,8 +1286,9 @@
 
 <button id="backTop"
         class="hidden fixed bottom-6 right-6 z-40
-               w-12 h-12 rounded-full bg-blue-600
-               hover:bg-blue-700 text-white shadow-lg">
+               w-12 h-12 rounded-full
+               bg-[#B85C4A] hover:bg-[#96483A]
+               text-white shadow-lg">
 
     <i class="fa-solid fa-arrow-up"></i>
 
@@ -1191,7 +1299,8 @@
      JAVASCRIPT
 ===================================================== -->
 
-<script src="/script.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
+
