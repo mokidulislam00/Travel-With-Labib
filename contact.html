@@ -1,0 +1,1186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us | Wanderly Tours</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .navbar {
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255,255,255,0.97);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .contact-hero {
+            min-height: 470px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.45),
+                    rgba(0,0,0,0.60)
+                ),
+
+                url("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=2000&q=85")
+                center/cover no-repeat;
+        }
+
+        .contact-card {
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.10);
+        }
+
+        .contact-input {
+            transition: all 0.2s ease;
+        }
+
+        .contact-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+        }
+
+        .submit-btn {
+            transition: all 0.25s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .success-box {
+            animation: successIn 0.3s ease;
+        }
+
+        @keyframes successIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        #backTop {
+            transition: all 0.3s ease;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="bg-gray-50 text-gray-800">
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar fixed top-0 left-0 w-full z-50 bg-white/95">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="h-20 flex items-center justify-between">
+
+            <!-- Logo -->
+
+            <a href="index.html"
+               class="flex items-center gap-2 text-2xl font-extrabold text-blue-600">
+
+                <i class="fa-solid fa-earth-americas"></i>
+
+                <span>Travel With Labib</span>
+
+            </a>
+
+
+            <!-- Desktop Menu -->
+
+            <div class="hidden lg:flex items-center gap-8">
+
+                <a href="index.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+
+                    Home
+
+                </a>
+
+
+                <a href="destinations.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+
+                    Destinations
+
+                </a>
+
+
+                <a href="tours.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+
+                    Tours
+
+                </a>
+
+
+                <a href="about.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+
+                    About
+
+                </a>
+
+
+                <a href="contact.html"
+                   class="text-blue-600 font-semibold">
+
+                    Contact
+
+                </a>
+
+
+                <a href="contact.html"
+                   class="bg-blue-600 hover:bg-blue-700
+                          text-white px-5 py-3 rounded-full
+                          font-semibold transition">
+
+                    Contact Us
+
+                </a>
+
+            </div>
+
+
+            <!-- Mobile Menu Button -->
+
+            <button id="menuBtn"
+                    class="lg:hidden text-2xl text-gray-700"
+                    aria-label="Open menu">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- Mobile Menu -->
+
+        <div id="mobileMenu"
+             class="hidden lg:hidden pb-5">
+
+            <div class="flex flex-col gap-4">
+
+                <a href="index.html"
+                   class="py-2 hover:text-blue-600">
+
+                    Home
+
+                </a>
+
+
+                <a href="destinations.html"
+                   class="py-2 hover:text-blue-600">
+
+                    Destinations
+
+                </a>
+
+
+                <a href="tours.html"
+                   class="py-2 hover:text-blue-600">
+
+                    Tours
+
+                </a>
+
+
+                <a href="about.html"
+                   class="py-2 hover:text-blue-600">
+
+                    About
+
+                </a>
+
+
+                <a href="contact.html"
+                   class="py-2 text-blue-600 font-semibold">
+
+                    Contact
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="contact-hero flex items-center justify-center
+                text-white text-center pt-20">
+
+    <div class="max-w-4xl px-5">
+
+        <span class="inline-block bg-white/20 backdrop-blur-md
+                     px-5 py-2 rounded-full text-sm font-semibold mb-6">
+
+            <i class="fa-solid fa-headset mr-2"></i>
+
+            We're Here To Help
+
+        </span>
+
+
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6">
+
+            Contact Us
+
+        </h1>
+
+
+        <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+
+            Have a question, need help planning a trip,
+            or simply want to say hello? We'd love to hear from you.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT INFO
+===================================================== -->
+
+<section class="py-16 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="grid md:grid-cols-3 gap-7">
+
+
+            <!-- Phone -->
+
+            <div class="contact-card bg-gray-50 rounded-3xl p-8 text-center">
+
+                <div class="w-16 h-16 mx-auto rounded-2xl
+                            bg-blue-100 text-blue-600
+                            flex items-center justify-center
+                            text-2xl mb-5">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                </div>
+
+
+                <h3 class="text-xl font-bold mb-2">
+
+                    Call Us
+
+                </h3>
+
+
+                <p class="text-gray-500 mb-3">
+
+                    Mon - Sat, 9AM - 8PM
+
+                </p>
+
+
+                <a href="tel:+1234567890"
+                   class="text-blue-600 font-semibold">
+
+                    +1 234 567 890
+
+                </a>
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="contact-card bg-gray-50 rounded-3xl p-8 text-center">
+
+                <div class="w-16 h-16 mx-auto rounded-2xl
+                            bg-green-100 text-green-600
+                            flex items-center justify-center
+                            text-2xl mb-5">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                </div>
+
+
+                <h3 class="text-xl font-bold mb-2">
+
+                    Email Us
+
+                </h3>
+
+
+                <p class="text-gray-500 mb-3">
+
+                    We'll reply within 24 hours
+
+                </p>
+
+
+                <a href="mailto:hello@wanderly.com"
+                   class="text-blue-600 font-semibold">
+
+                    hello@wanderly.com
+
+                </a>
+
+            </div>
+
+
+            <!-- Location -->
+
+            <div class="contact-card bg-gray-50 rounded-3xl p-8 text-center">
+
+                <div class="w-16 h-16 mx-auto rounded-2xl
+                            bg-purple-100 text-purple-600
+                            flex items-center justify-center
+                            text-2xl mb-5">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+
+                <h3 class="text-xl font-bold mb-2">
+
+                    Visit Us
+
+                </h3>
+
+
+                <p class="text-gray-500 mb-3">
+
+                    Our travel office
+
+                </p>
+
+
+                <span class="text-blue-600 font-semibold">
+
+                    123 Travel Street, City
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT FORM + MAP
+===================================================== -->
+
+<section class="py-20">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="grid lg:grid-cols-2 gap-10">
+
+
+            <!-- CONTACT FORM -->
+
+            <div class="bg-white rounded-3xl shadow-sm p-7 md:p-10">
+
+                <div class="mb-8">
+
+                    <span class="text-blue-600 font-bold uppercase
+                                 tracking-wider text-sm">
+
+                        Send A Message
+
+                    </span>
+
+
+                    <h2 class="text-3xl font-extrabold mt-3">
+
+                        Let's Talk About Your Trip
+
+                    </h2>
+
+
+                    <p class="text-gray-500 mt-3">
+
+                        Fill out the form and our travel team
+                        will get back to you soon.
+
+                    </p>
+
+                </div>
+
+
+                <!-- Form -->
+
+                <form id="contactForm"
+                      class="space-y-5"
+                      novalidate>
+
+
+                    <!-- Name -->
+
+                    <div>
+
+                        <label for="contactName"
+                               class="block font-semibold mb-2">
+
+                            Full Name
+
+                        </label>
+
+
+                        <input
+                            id="contactName"
+                            type="text"
+                            placeholder="Enter your full name"
+                            class="contact-input w-full px-4 py-3.5
+                                   border border-gray-200 rounded-xl">
+
+                        <p id="nameError"
+                           class="hidden text-red-500 text-sm mt-2">
+
+                            Please enter your name.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div>
+
+                        <label for="contactEmail"
+                               class="block font-semibold mb-2">
+
+                            Email Address
+
+                        </label>
+
+
+                        <input
+                            id="contactEmail"
+                            type="email"
+                            placeholder="Enter your email"
+                            class="contact-input w-full px-4 py-3.5
+                                   border border-gray-200 rounded-xl">
+
+                        <p id="emailError"
+                           class="hidden text-red-500 text-sm mt-2">
+
+                            Please enter a valid email address.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div>
+
+                        <label for="contactPhone"
+                               class="block font-semibold mb-2">
+
+                            Phone Number
+
+                        </label>
+
+
+                        <input
+                            id="contactPhone"
+                            type="tel"
+                            placeholder="Enter your phone number"
+                            class="contact-input w-full px-4 py-3.5
+                                   border border-gray-200 rounded-xl">
+
+                    </div>
+
+
+                    <!-- Subject -->
+
+                    <div>
+
+                        <label for="contactSubject"
+                               class="block font-semibold mb-2">
+
+                            Subject
+
+                        </label>
+
+
+                        <select
+                            id="contactSubject"
+                            class="contact-input w-full px-4 py-3.5
+                                   border border-gray-200 rounded-xl">
+
+                            <option value="">
+                                Select a subject
+                            </option>
+
+                            <option value="tour">
+                                Tour Information
+                            </option>
+
+                            <option value="booking">
+                                Booking Help
+                            </option>
+
+                            <option value="custom">
+                                Custom Trip
+                            </option>
+
+                            <option value="other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Message -->
+
+                    <div>
+
+                        <label for="contactMessage"
+                               class="block font-semibold mb-2">
+
+                            Message
+
+                        </label>
+
+
+                        <textarea
+                            id="contactMessage"
+                            rows="5"
+                            placeholder="Tell us how we can help..."
+                            class="contact-input w-full px-4 py-3.5
+                                   border border-gray-200 rounded-xl resize-none"></textarea>
+
+
+                        <p id="messageError"
+                           class="hidden text-red-500 text-sm mt-2">
+
+                            Please enter your message.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="submit-btn w-full bg-blue-600
+                               hover:bg-blue-700 text-white
+                               py-4 rounded-xl font-bold">
+
+                        <i class="fa-solid fa-paper-plane mr-2"></i>
+
+                        Send Message
+
+                    </button>
+
+                </form>
+
+
+                <!-- Success Message -->
+
+                <div id="contactSuccess"
+                     class="success-box hidden text-center py-10">
+
+                    <div class="w-20 h-20 mx-auto rounded-full
+                                bg-green-100 text-green-600
+                                flex items-center justify-center
+                                text-4xl mb-6">
+
+                        <i class="fa-solid fa-check"></i>
+
+                    </div>
+
+
+                    <h3 class="text-2xl font-extrabold">
+
+                        Message Sent Successfully!
+
+                    </h3>
+
+
+                    <p class="text-gray-500 mt-3">
+
+                        Thank you for contacting Wanderly.
+                        Our team will get back to you soon.
+
+                    </p>
+
+
+                    <button
+                        id="newMessageBtn"
+                        class="mt-6 px-6 py-3 rounded-xl
+                               bg-blue-600 text-white font-semibold">
+
+                        Send Another Message
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- MAP / OFFICE -->
+
+            <div class="space-y-6">
+
+
+                <!-- Map -->
+
+                <div class="bg-white rounded-3xl overflow-hidden
+                            shadow-sm">
+
+                    <div class="h-[390px]">
+
+                        <iframe
+                            src="https://www.google.com/maps?q=Dhaka%2C%20Bangladesh&output=embed"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Office Hours -->
+
+                <div class="bg-blue-600 text-white rounded-3xl p-8">
+
+                    <div class="flex items-center gap-4 mb-6">
+
+                        <div class="w-14 h-14 rounded-2xl
+                                    bg-white/15
+                                    flex items-center justify-center
+                                    text-2xl">
+
+                            <i class="fa-regular fa-clock"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3 class="text-xl font-bold">
+
+                                Office Hours
+
+                            </h3>
+
+                            <p class="text-blue-100">
+
+                                We're ready to help
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="space-y-4 text-sm">
+
+                        <div class="flex justify-between
+                                    border-b border-white/20 pb-3">
+
+                            <span>Monday - Friday</span>
+
+                            <span class="font-semibold">
+                                9:00 AM - 8:00 PM
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex justify-between
+                                    border-b border-white/20 pb-3">
+
+                            <span>Saturday</span>
+
+                            <span class="font-semibold">
+                                10:00 AM - 6:00 PM
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex justify-between">
+
+                            <span>Sunday</span>
+
+                            <span class="font-semibold">
+                                Closed
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section class="py-20 bg-white">
+
+    <div class="max-w-4xl mx-auto px-5">
+
+        <div class="text-center mb-12">
+
+            <span class="text-blue-600 font-bold uppercase
+                         tracking-wider text-sm">
+
+                FAQ
+
+            </span>
+
+
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-3">
+
+                Frequently Asked Questions
+
+            </h2>
+
+        </div>
+
+
+        <div class="space-y-4">
+
+
+            <!-- FAQ 1 -->
+
+            <div class="border border-gray-200 rounded-2xl overflow-hidden">
+
+                <button
+                    class="faq-btn w-full flex items-center
+                           justify-between p-5 text-left font-bold">
+
+                    <span>
+                        How can I book a tour?
+                    </span>
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+
+                <div class="faq-answer hidden px-5 pb-5 text-gray-500 leading-7">
+
+                    You can visit our Tours page, choose your
+                    preferred tour and click the Book Now button.
+                    Then fill out the booking form.
+
+                </div>
+
+            </div>
+
+
+            <!-- FAQ 2 -->
+
+            <div class="border border-gray-200 rounded-2xl overflow-hidden">
+
+                <button
+                    class="faq-btn w-full flex items-center
+                           justify-between p-5 text-left font-bold">
+
+                    <span>
+                        Can I customize my trip?
+                    </span>
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+
+                <div class="faq-answer hidden px-5 pb-5 text-gray-500 leading-7">
+
+                    Yes. Contact our travel team and tell us
+                    your preferred destination, dates and
+                    travel requirements.
+
+                </div>
+
+            </div>
+
+
+            <!-- FAQ 3 -->
+
+            <div class="border border-gray-200 rounded-2xl overflow-hidden">
+
+                <button
+                    class="faq-btn w-full flex items-center
+                           justify-between p-5 text-left font-bold">
+
+                    <span>
+                        Do you provide travel support?
+                    </span>
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+
+                <div class="faq-answer hidden px-5 pb-5 text-gray-500 leading-7">
+
+                    Yes. Our team is available to assist you
+                    with general travel planning and tour
+                    information.
+
+                </div>
+
+            </div>
+
+
+            <!-- FAQ 4 -->
+
+            <div class="border border-gray-200 rounded-2xl overflow-hidden">
+
+                <button
+                    class="faq-btn w-full flex items-center
+                           justify-between p-5 text-left font-bold">
+
+                    <span>
+                        How quickly will you reply?
+                    </span>
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+
+                <div class="faq-answer hidden px-5 pb-5 text-gray-500 leading-7">
+
+                    We aim to respond to inquiries within
+                    24 hours during business days.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="py-20 bg-blue-600 text-white">
+
+    <div class="max-w-5xl mx-auto px-5 text-center">
+
+        <i class="fa-solid fa-plane-departure text-5xl mb-6"></i>
+
+
+        <h2 class="text-3xl md:text-5xl font-extrabold mb-5">
+
+            Your Next Adventure Starts Here
+
+        </h2>
+
+
+        <p class="text-blue-100 max-w-2xl mx-auto mb-8">
+
+            Have a destination in mind?
+            Let's turn your travel dream into reality.
+
+        </p>
+
+
+        <a href="tours.html"
+           class="inline-flex items-center gap-2
+                  bg-white text-blue-600
+                  px-7 py-3.5 rounded-full
+                  font-bold hover:bg-gray-100 transition">
+
+            Explore Tours
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="bg-gray-950 text-gray-300">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14">
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+
+            <!-- Brand -->
+
+            <div>
+
+                <div class="flex items-center gap-2
+                            text-2xl font-extrabold
+                            text-white mb-5">
+
+                    <i class="fa-solid fa-earth-americas"></i>
+
+                    Travel With Labib
+
+                </div>
+
+
+                <p class="text-gray-400 leading-7">
+
+                    Making your travel dreams come true with
+                    unforgettable experiences around the world.
+
+                </p>
+
+            </div>
+
+
+            <!-- Quick Links -->
+
+            <div>
+
+                <h3 class="text-white font-bold text-lg mb-5">
+
+                    Quick Links
+
+                </h3>
+
+
+                <div class="space-y-3">
+
+                    <a href="index.html"
+                       class="block hover:text-white transition">
+
+                        Home
+
+                    </a>
+
+
+                    <a href="destinations.html"
+                       class="block hover:text-white transition">
+
+                        Destinations
+
+                    </a>
+
+
+                    <a href="tours.html"
+                       class="block hover:text-white transition">
+
+                        Tours
+
+                    </a>
+
+
+                    <a href="about.html"
+                       class="block hover:text-white transition">
+
+                        About
+
+                    </a>
+
+
+                    <a href="contact.html"
+                       class="block hover:text-white transition">
+
+                        Contact
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Services -->
+
+            <div>
+
+                <h3 class="text-white font-bold text-lg mb-5">
+
+                    Services
+
+                </h3>
+
+
+                <div class="space-y-3 text-gray-400">
+
+                    <p>Tour Packages</p>
+                    <p>Hotel Booking</p>
+                    <p>Flight Booking</p>
+                    <p>Travel Guide</p>
+                    <p>Travel Insurance</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Social -->
+
+            <div>
+
+                <h3 class="text-white font-bold text-lg mb-5">
+
+                    Follow Us
+
+                </h3>
+
+
+                <div class="flex gap-3">
+
+                    <a href="#"
+                       class="w-11 h-11 rounded-full bg-gray-800
+                              flex items-center justify-center
+                              hover:bg-blue-600 transition">
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+
+                    <a href="#"
+                       class="w-11 h-11 rounded-full bg-gray-800
+                              flex items-center justify-center
+                              hover:bg-pink-600 transition">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                    <a href="#"
+                       class="w-11 h-11 rounded-full bg-gray-800
+                              flex items-center justify-center
+                              hover:bg-sky-500 transition">
+
+                        <i class="fa-brands fa-twitter"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="border-t border-gray-800 mt-12 pt-7
+                    text-center text-gray-500">
+
+            © 2026 Travel With Labib. All rights reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     BACK TO TOP
+===================================================== -->
+
+<button id="backTop"
+        class="hidden fixed bottom-6 right-6 z-40
+               w-12 h-12 rounded-full bg-blue-600
+               hover:bg-blue-700 text-white shadow-lg">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+
+<!-- Shared JavaScript -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
+

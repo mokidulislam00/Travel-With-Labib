@@ -1,0 +1,1428 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travelia - Tour & Travel</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =========================
+         CUSTOM CSS
+    ========================== -->
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+        }
+
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            height: 100vh;
+            min-height: 650px;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           SLIDES
+        ========================== */
+
+        .slide {
+            position: absolute;
+            inset: 0;
+
+            opacity: 0;
+
+            transition: opacity 1s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        /* =========================
+           DARK OVERLAY
+        ========================== */
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,0.75),
+                    rgba(0,0,0,0.25)
+                );
+        }
+
+
+        /* =========================
+           HERO CONTENT
+        ========================== */
+
+        .hero-content {
+            animation: fadeUp 0.8s ease;
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =========================
+           CAROUSEL BUTTON
+        ========================== */
+
+        .carousel-btn {
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            color: #111827;
+            transform: scale(1.1);
+        }
+
+
+        /* =========================
+           INDICATORS
+        ========================== */
+
+        .indicator {
+            width: 20px;
+            height: 5px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.5);
+
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            width: 40px;
+            background: white;
+        }
+
+
+        /* =========================
+           CARDS
+        ========================== */
+
+        .destination-card {
+            transition: all 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-8px);
+        }
+
+
+        /* =========================
+           MOBILE MENU
+        ========================== */
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.show {
+            display: block;
+        }
+
+
+        /* =========================
+           BACK TO TOP
+        ========================== */
+
+        #backTop {
+            opacity: 0;
+            visibility: hidden;
+
+            transition: all 0.3s ease;
+        }
+
+        #backTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="bg-gray-50">
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="fixed top-0 left-0 w-full z-50">
+
+    <nav class="bg-white shadow-md">
+
+        <div class="max-w-7xl mx-auto px-5">
+
+            <div class="h-20 flex items-center justify-between">
+
+
+                <!-- LOGO -->
+
+                <a href="index.html"
+                   class="flex items-center gap-3">
+
+                    <div
+                        class="w-11 h-11 bg-blue-600 rounded-full
+                               flex items-center justify-center text-white">
+
+                        <i class="fa-solid fa-plane"></i>
+
+                    </div>
+
+                    <span class="text-2xl font-extrabold">
+
+                        Travel With<span class="text-blue-600">
+                            Labib
+                        </span>
+
+                    </span>
+
+                </a>
+
+
+                <!-- DESKTOP MENU -->
+
+                <div class="hidden md:flex items-center gap-8">
+
+                    <a href="index.html"
+                       class="text-blue-600 font-semibold">
+                        Home
+                    </a>
+
+                    <a href="destinations.html"
+                       class="text-gray-600 hover:text-blue-600">
+                        Destinations
+                    </a>
+
+                    <a href="tours.html"
+                       class="text-gray-600 hover:text-blue-600">
+                        Tours
+                    </a>
+
+                    <a href="about.html"
+                       class="text-gray-600 hover:text-blue-600">
+                        About
+                    </a>
+
+                    <a href="contact.html"
+                       class="text-gray-600 hover:text-blue-600">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <!-- DESKTOP BUTTON -->
+
+                <a
+                    href="tours.html"
+                    class="hidden md:flex items-center gap-2
+                           bg-blue-600 text-white
+                           px-5 py-3 rounded-full
+                           hover:bg-blue-700 transition">
+
+                    Explore Tours
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+
+                <!-- MOBILE BUTTON -->
+
+                <button
+                    id="menuBtn"
+                    class="md:hidden text-2xl">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- MOBILE MENU -->
+
+            <div id="mobileMenu"
+                 class="mobile-menu pb-5">
+
+                <div class="flex flex-col gap-4">
+
+                    <a href="index.html"
+                       class="text-blue-600 font-semibold">
+                        Home
+                    </a>
+
+                    <a href="destinations.html"
+                       class="text-gray-600">
+                        Destinations
+                    </a>
+
+                    <a href="tours.html"
+                       class="text-gray-600">
+                        Tours
+                    </a>
+
+                    <a href="about.html"
+                       class="text-gray-600">
+                        About
+                    </a>
+
+                    <a href="contact.html"
+                       class="text-gray-600">
+                        Contact
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO SECTION
+===================================================== -->
+
+<section class="hero">
+
+
+    <!-- SLIDE 1 -->
+
+    <div class="slide active">
+
+        <img
+            src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2000&q=80"
+            alt="Mountain">
+
+        <div class="overlay"></div>
+
+    </div>
+
+
+    <!-- SLIDE 2 -->
+
+    <div class="slide">
+
+        <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80"
+            alt="Beach">
+
+        <div class="overlay"></div>
+
+    </div>
+
+
+    <!-- SLIDE 3 -->
+
+    <div class="slide">
+
+        <img
+            src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=2000&q=80"
+            alt="Travel">
+
+        <div class="overlay"></div>
+
+    </div>
+
+
+    <!-- HERO CONTENT -->
+
+    <div
+        class="absolute inset-0 z-10
+               flex items-center">
+
+        <div
+            class="max-w-7xl mx-auto
+                   px-5 w-full">
+
+            <div
+                id="heroContent"
+                class="hero-content max-w-3xl text-white">
+
+
+                <p
+                    id="heroSmall"
+                    class="uppercase tracking-[4px]
+                           text-blue-300
+                           font-semibold mb-4">
+
+                    Discover The World
+
+                </p>
+
+
+                <h1
+                    id="heroTitle"
+                    class="text-5xl md:text-7xl
+                           font-extrabold
+                           leading-tight">
+
+                    Explore The World,
+                    <span class="text-blue-400">
+                        Create Memories.
+                    </span>
+
+                </h1>
+
+
+                <p
+                    id="heroText"
+                    class="text-lg md:text-xl
+                           text-gray-200
+                           mt-6 max-w-2xl">
+
+                    Discover beautiful destinations,
+                    exciting adventures and unforgettable
+                    experiences.
+
+                </p>
+
+
+                <div
+                    class="flex flex-wrap gap-4 mt-8">
+
+
+                    <a
+                        href="destinations.html"
+                        class="bg-blue-600
+                               hover:bg-blue-700
+                               px-7 py-4
+                               rounded-full
+                               font-bold
+                               transition
+                               hover:-translate-y-1">
+
+                        Explore Destinations
+
+                        <i
+                            class="fa-solid fa-arrow-right ml-2">
+                        </i>
+
+                    </a>
+
+
+                    <a
+                        href="tours.html"
+                        class="border border-white
+                               px-7 py-4
+                               rounded-full
+                               font-bold
+                               hover:bg-white
+                               hover:text-gray-900
+                               transition">
+
+                        View Tours
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PREVIOUS BUTTON -->
+
+    <button
+        id="prevBtn"
+        class="carousel-btn
+               absolute left-5
+               top-1/2
+               -translate-y-1/2
+               z-20
+               w-12 h-12
+               rounded-full
+               bg-white/20
+               backdrop-blur
+               text-white
+               text-xl">
+
+        <i class="fa-solid fa-chevron-left"></i>
+
+    </button>
+
+
+
+    <!-- NEXT BUTTON -->
+
+    <button
+        id="nextBtn"
+        class="carousel-btn
+               absolute right-5
+               top-1/2
+               -translate-y-1/2
+               z-20
+               w-12 h-12
+               rounded-full
+               bg-white/20
+               backdrop-blur
+               text-white
+               text-xl">
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+
+
+    <!-- INDICATORS -->
+
+    <div
+        class="absolute bottom-10
+               left-1/2
+               -translate-x-1/2
+               z-20
+               flex gap-3">
+
+        <button
+            class="indicator active"
+            data-slide="0">
+        </button>
+
+        <button
+            class="indicator"
+            data-slide="1">
+        </button>
+
+        <button
+            class="indicator"
+            data-slide="2">
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SEARCH SECTION
+===================================================== -->
+
+<section class="-mt-10 relative z-30 px-5">
+
+    <div
+        class="max-w-6xl mx-auto
+               bg-white
+               rounded-2xl
+               shadow-xl
+               p-6">
+
+
+        <div
+            class="grid grid-cols-1
+                   md:grid-cols-4 gap-4">
+
+
+            <!-- DESTINATION -->
+
+            <div>
+
+                <label
+                    class="block text-sm
+                           font-semibold mb-2">
+
+                    Destination
+
+                </label>
+
+                <input
+                    id="destination"
+                    type="text"
+                    placeholder="Where do you want to go?"
+                    class="w-full border
+                           border-gray-200
+                           rounded-xl
+                           px-4 py-3
+                           outline-none
+                           focus:border-blue-500">
+
+            </div>
+
+
+            <!-- DATE -->
+
+            <div>
+
+                <label
+                    class="block text-sm
+                           font-semibold mb-2">
+
+                    Travel Date
+
+                </label>
+
+                <input
+                    id="date"
+                    type="date"
+                    class="w-full border
+                           border-gray-200
+                           rounded-xl
+                           px-4 py-3
+                           outline-none
+                           focus:border-blue-500">
+
+            </div>
+
+
+            <!-- TRAVELERS -->
+
+            <div>
+
+                <label
+                    class="block text-sm
+                           font-semibold mb-2">
+
+                    Travelers
+
+                </label>
+
+                <select
+                    id="travelers"
+                    class="w-full border
+                           border-gray-200
+                           rounded-xl
+                           px-4 py-3
+                           outline-none">
+
+                    <option>1 Traveler</option>
+                    <option>2 Travelers</option>
+                    <option>3 Travelers</option>
+                    <option>4 Travelers</option>
+                    <option>5+ Travelers</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="flex items-end">
+
+                <button
+                    id="searchBtn"
+                    class="w-full
+                           bg-blue-600
+                           hover:bg-blue-700
+                           text-white
+                           rounded-xl
+                           py-3
+                           font-bold
+                           transition">
+
+                    <i
+                        class="fa-solid
+                               fa-magnifying-glass mr-2">
+                    </i>
+
+                    Search Tours
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     POPULAR DESTINATIONS
+===================================================== -->
+
+<section class="py-24">
+
+    <div
+        class="max-w-7xl mx-auto
+               px-5">
+
+
+        <div class="text-center mb-12">
+
+            <p
+                class="text-blue-600
+                       uppercase
+                       tracking-widest
+                       font-bold">
+
+                Explore
+
+            </p>
+
+            <h2
+                class="text-4xl md:text-5xl
+                       font-extrabold mt-2">
+
+                Popular Destinations
+
+            </h2>
+
+            <p
+                class="text-gray-500
+                       max-w-2xl
+                       mx-auto mt-4">
+
+                Discover amazing destinations
+                around the world.
+
+            </p>
+
+        </div>
+
+
+
+        <div
+            class="grid grid-cols-1
+                   md:grid-cols-3 gap-7">
+
+
+            <!-- CARD 1 -->
+
+            <div
+                class="destination-card
+                       relative
+                       h-96
+                       rounded-2xl
+                       overflow-hidden">
+
+
+                <img
+                    src="https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?auto=format&fit=crop&w=1000&q=80"
+                    alt="Switzerland"
+                    class="w-full h-full object-cover">
+
+
+                <div
+                    class="absolute inset-0
+                           bg-gradient-to-t
+                           from-black/80
+                           to-transparent">
+                </div>
+
+
+                <div
+                    class="absolute bottom-0
+                           p-6 text-white">
+
+                    <p class="text-blue-300">
+                        Adventure
+                    </p>
+
+                    <h3
+                        class="text-3xl
+                               font-bold">
+
+                        Switzerland
+
+                    </h3>
+
+                    <p class="mt-1">
+                        Swiss Alps
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 2 -->
+
+            <div
+                class="destination-card
+                       relative
+                       h-96
+                       rounded-2xl
+                       overflow-hidden">
+
+
+                <img
+                    src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=80"
+                    alt="Bali"
+                    class="w-full h-full object-cover">
+
+
+                <div
+                    class="absolute inset-0
+                           bg-gradient-to-t
+                           from-black/80
+                           to-transparent">
+                </div>
+
+
+                <div
+                    class="absolute bottom-0
+                           p-6 text-white">
+
+                    <p class="text-blue-300">
+                        Beach
+                    </p>
+
+                    <h3
+                        class="text-3xl
+                               font-bold">
+
+                        Bali
+
+                    </h3>
+
+                    <p class="mt-1">
+                        Indonesia
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 3 -->
+
+            <div
+                class="destination-card
+                       relative
+                       h-96
+                       rounded-2xl
+                       overflow-hidden">
+
+
+                <img
+                    src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1000&q=80"
+                    alt="Santorini"
+                    class="w-full h-full object-cover">
+
+
+                <div
+                    class="absolute inset-0
+                           bg-gradient-to-t
+                           from-black/80
+                           to-transparent">
+                </div>
+
+
+                <div
+                    class="absolute bottom-0
+                           p-6 text-white">
+
+                    <p class="text-blue-300">
+                        Relaxation
+                    </p>
+
+                    <h3
+                        class="text-3xl
+                               font-bold">
+
+                        Santorini
+
+                    </h3>
+
+                    <p class="mt-1">
+                        Greece
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     WHY CHOOSE US
+===================================================== -->
+
+<section class="py-24 bg-white">
+
+    <div
+        class="max-w-7xl mx-auto
+               px-5">
+
+
+        <div
+            class="text-center mb-12">
+
+            <p
+                class="text-blue-600
+                       uppercase
+                       font-bold
+                       tracking-widest">
+
+                Why Choose Us
+
+            </p>
+
+            <h2
+                class="text-4xl
+                       font-extrabold
+                       mt-2">
+
+                Travel With Confidence
+
+            </h2>
+
+        </div>
+
+
+
+        <div
+            class="grid grid-cols-1
+                   sm:grid-cols-2
+                   lg:grid-cols-4 gap-6">
+
+
+            <div
+                class="p-7
+                       rounded-2xl
+                       bg-gray-50
+                       text-center
+                       hover:shadow-lg
+                       transition">
+
+                <div
+                    class="w-14 h-14
+                           mx-auto
+                           rounded-xl
+                           bg-blue-100
+                           text-blue-600
+                           flex items-center
+                           justify-center
+                           text-2xl">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+                <h3
+                    class="font-bold
+                           text-xl mt-5">
+
+                    Safe Travel
+
+                </h3>
+
+                <p
+                    class="text-gray-500
+                           mt-2">
+
+                    Your safety is always
+                    our priority.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="p-7
+                       rounded-2xl
+                       bg-gray-50
+                       text-center
+                       hover:shadow-lg
+                       transition">
+
+                <div
+                    class="w-14 h-14
+                           mx-auto
+                           rounded-xl
+                           bg-blue-100
+                           text-blue-600
+                           flex items-center
+                           justify-center
+                           text-2xl">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                </div>
+
+                <h3
+                    class="font-bold
+                           text-xl mt-5">
+
+                    Best Prices
+
+                </h3>
+
+                <p
+                    class="text-gray-500
+                           mt-2">
+
+                    Affordable packages
+                    for every traveler.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="p-7
+                       rounded-2xl
+                       bg-gray-50
+                       text-center
+                       hover:shadow-lg
+                       transition">
+
+                <div
+                    class="w-14 h-14
+                           mx-auto
+                           rounded-xl
+                           bg-blue-100
+                           text-blue-600
+                           flex items-center
+                           justify-center
+                           text-2xl">
+
+                    <i class="fa-solid fa-headset"></i>
+
+                </div>
+
+                <h3
+                    class="font-bold
+                           text-xl mt-5">
+
+                    24/7 Support
+
+                </h3>
+
+                <p
+                    class="text-gray-500
+                           mt-2">
+
+                    We're always here
+                    to help you.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="p-7
+                       rounded-2xl
+                       bg-gray-50
+                       text-center
+                       hover:shadow-lg
+                       transition">
+
+                <div
+                    class="w-14 h-14
+                           mx-auto
+                           rounded-xl
+                           bg-blue-100
+                           text-blue-600
+                           flex items-center
+                           justify-center
+                           text-2xl">
+
+                    <i class="fa-solid fa-compass"></i>
+
+                </div>
+
+                <h3
+                    class="font-bold
+                           text-xl mt-5">
+
+                    Expert Guides
+
+                </h3>
+
+                <p
+                    class="text-gray-500
+                           mt-2">
+
+                    Explore with
+                    experienced guides.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="py-24">
+
+    <div class="max-w-6xl mx-auto px-5">
+
+        <div
+            class="relative
+                   rounded-3xl
+                   overflow-hidden">
+
+
+            <img
+                src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=80"
+                alt="Travel"
+                class="absolute inset-0
+                       w-full h-full
+                       object-cover">
+
+
+            <div
+                class="absolute inset-0
+                       bg-blue-900/75">
+            </div>
+
+
+            <div
+                class="relative
+                       text-center
+                       text-white
+                       py-20 px-5">
+
+
+                <h2
+                    class="text-4xl md:text-5xl
+                           font-extrabold">
+
+                    Ready For Your Next Adventure?
+
+                </h2>
+
+
+                <p
+                    class="max-w-2xl
+                           mx-auto
+                           mt-5
+                           text-blue-100">
+
+                    Start planning your dream
+                    journey today.
+
+                </p>
+
+
+                <a
+                    href="contact.html"
+                    class="inline-block
+                           mt-8
+                           bg-white
+                           text-blue-700
+                           px-8 py-4
+                           rounded-full
+                           font-bold
+                           hover:bg-blue-50
+                           transition">
+
+                    Plan My Trip
+
+                    <i
+                        class="fa-solid
+                               fa-arrow-right ml-2">
+                    </i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="bg-gray-950 text-gray-300">
+
+    <div
+        class="max-w-7xl mx-auto
+               px-5 py-14">
+
+
+        <div
+            class="grid grid-cols-1
+                   md:grid-cols-4 gap-10">
+
+
+            <!-- BRAND -->
+
+            <div>
+
+                <h2
+                    class="text-2xl
+                           font-extrabold
+                           text-white">
+
+                    Travel With<span class="text-blue-500">
+                        Labib
+                    </span>
+
+                </h2>
+
+                <p
+                    class="mt-4
+                           text-gray-400">
+
+                    Your trusted partner
+                    for unforgettable
+                    travel experiences.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- LINKS -->
+
+            <div>
+
+                <h3
+                    class="text-white
+                           font-bold
+                           text-lg">
+
+                    Quick Links
+
+                </h3>
+
+                <div
+                    class="flex flex-col
+                           gap-3 mt-5">
+
+                    <a href="index.html"
+                       class="hover:text-blue-400">
+                        Home
+                    </a>
+
+                    <a href="destinations.html"
+                       class="hover:text-blue-400">
+                        Destinations
+                    </a>
+
+                    <a href="tours.html"
+                       class="hover:text-blue-400">
+                        Tours
+                    </a>
+
+                    <a href="about.html"
+                       class="hover:text-blue-400">
+                        About
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SERVICES -->
+
+            <div>
+
+                <h3
+                    class="text-white
+                           font-bold
+                           text-lg">
+
+                    Services
+
+                </h3>
+
+                <div
+                    class="flex flex-col
+                           gap-3 mt-5">
+
+                    <p>Tour Packages</p>
+
+                    <p>Travel Planning</p>
+
+                    <p>Hotel Booking</p>
+
+                    <p>Travel Support</p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTACT -->
+
+            <div>
+
+                <h3
+                    class="text-white
+                           font-bold
+                           text-lg">
+
+                    Contact
+
+                </h3>
+
+                <div
+                    class="space-y-4 mt-5">
+
+                    <p>
+                        <i class="fa-solid
+                                  fa-location-dot
+                                  text-blue-500 mr-2">
+                        </i>
+
+                        Dhaka, Bangladesh
+                    </p>
+
+                    <p>
+                        <i class="fa-solid
+                                  fa-phone
+                                  text-blue-500 mr-2">
+                        </i>
+
+                        +880 1234 567890
+                    </p>
+
+                    <p>
+                        <i class="fa-solid
+                                  fa-envelope
+                                  text-blue-500 mr-2">
+                        </i>
+
+                        hello@travelia.com
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="border-t
+                   border-gray-800
+                   mt-10 pt-7
+                   text-center
+                   text-gray-500">
+
+            © 2026 Travel With Labib.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     BACK TO TOP
+===================================================== -->
+
+<button
+    id="backTop"
+    class="fixed
+           bottom-6 right-6
+           w-12 h-12
+           rounded-full
+           bg-blue-600
+           text-white
+           shadow-lg
+           z-50">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+<script src="/script.js"></script>
+</body>
+</html>
+

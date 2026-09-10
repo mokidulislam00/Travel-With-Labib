@@ -1,0 +1,1042 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | Wanderly Tours</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .navbar {
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .about-hero {
+            min-height: 480px;
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.45),
+                rgba(0, 0, 0, 0.60)),
+                url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=85")
+                center/cover no-repeat;
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.10);
+        }
+
+        .team-card {
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-7px);
+        }
+
+        .team-card img {
+            transition: transform 0.4s ease;
+        }
+
+        .team-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .counter-card {
+            transition: all 0.3s ease;
+        }
+
+        .counter-card:hover {
+            transform: translateY(-5px);
+        }
+
+        #backTop {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar fixed top-0 left-0 w-full z-50 bg-white/95">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="h-20 flex items-center justify-between">
+
+            <!-- Logo -->
+            <a href="index.html"
+               class="flex items-center gap-2 text-2xl font-extrabold text-blue-600">
+
+                <i class="fa-solid fa-earth-americas"></i>
+
+                <span>Travel With Labib</span>
+
+            </a>
+
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center gap-8">
+
+                <a href="index.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                    Home
+                </a>
+
+                <a href="destinations.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                    Destinations
+                </a>
+
+                <a href="tours.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                    Tours
+                </a>
+
+                <a href="about.html"
+                   class="text-blue-600 font-semibold">
+                    About
+                </a>
+
+                <a href="contact.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                    Contact
+                </a>
+
+                <a href="contact.html"
+                   class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-full font-semibold transition">
+                    Contact Us
+                </a>
+
+            </div>
+
+
+            <!-- Mobile Button -->
+            <button id="menuBtn"
+                    class="lg:hidden text-2xl text-gray-700"
+                    aria-label="Open menu">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu"
+             class="hidden lg:hidden pb-5">
+
+            <div class="flex flex-col gap-4">
+
+                <a href="index.html"
+                   class="py-2 hover:text-blue-600">
+                    Home
+                </a>
+
+                <a href="destinations.html"
+                   class="py-2 hover:text-blue-600">
+                    Destinations
+                </a>
+
+                <a href="tours.html"
+                   class="py-2 hover:text-blue-600">
+                    Tours
+                </a>
+
+                <a href="about.html"
+                   class="py-2 text-blue-600 font-semibold">
+                    About
+                </a>
+
+                <a href="contact.html"
+                   class="py-2 hover:text-blue-600">
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="about-hero flex items-center justify-center text-white text-center pt-20">
+
+    <div class="max-w-4xl px-5">
+
+        <span class="inline-block bg-white/20 backdrop-blur-md
+                     px-5 py-2 rounded-full text-sm font-semibold mb-6">
+
+            <i class="fa-solid fa-heart mr-2"></i>
+
+            Travel With Purpose
+
+        </span>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6">
+            About Travel With Labib
+        </h1>
+
+        <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+
+            We create meaningful travel experiences that connect
+            people with beautiful places around the world.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     OUR STORY
+===================================================== -->
+
+<section class="py-20 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+            <!-- Image -->
+            <div class="relative">
+
+                <img
+                    src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=85"
+                    alt="Travel adventure"
+                    class="w-full h-[480px] object-cover rounded-3xl shadow-xl">
+
+                <!-- Floating Card -->
+                <div class="absolute -bottom-6 -right-4 md:right-8
+                            bg-white rounded-2xl shadow-xl p-5">
+
+                    <div class="flex items-center gap-4">
+
+                        <div class="w-14 h-14 rounded-full bg-blue-100
+                                    text-blue-600 flex items-center justify-center
+                                    text-2xl">
+
+                            <i class="fa-solid fa-plane"></i>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-2xl font-extrabold text-gray-900">
+                                10+
+                            </p>
+
+                            <p class="text-sm text-gray-500">
+                                Years of Experience
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Content -->
+            <div>
+
+                <span class="text-blue-600 font-bold uppercase
+                             tracking-wider text-sm">
+
+                    Our Story
+
+                </span>
+
+                <h2 class="text-3xl md:text-4xl font-extrabold
+                           mt-3 mb-6">
+
+                    We Believe Travel
+                    <span class="text-blue-600">Changes Lives</span>
+
+                </h2>
+
+                <p class="text-gray-600 leading-8 mb-5">
+
+                    Wanderly started with a simple dream:
+                    to make discovering the world easier,
+                    more exciting and more meaningful.
+
+                </p>
+
+                <p class="text-gray-600 leading-8 mb-7">
+
+                    From peaceful beaches to breathtaking mountains
+                    and vibrant cities, we carefully design experiences
+                    that allow travelers to explore the world
+                    without unnecessary stress.
+
+                </p>
+
+
+                <!-- Checklist -->
+                <div class="space-y-4">
+
+                    <div class="flex items-center gap-3">
+
+                        <div class="w-7 h-7 rounded-full bg-green-100
+                                    text-green-600 flex items-center justify-center">
+
+                            <i class="fa-solid fa-check text-sm"></i>
+
+                        </div>
+
+                        <span class="font-medium">
+                            Carefully selected destinations
+                        </span>
+
+                    </div>
+
+
+                    <div class="flex items-center gap-3">
+
+                        <div class="w-7 h-7 rounded-full bg-green-100
+                                    text-green-600 flex items-center justify-center">
+
+                            <i class="fa-solid fa-check text-sm"></i>
+
+                        </div>
+
+                        <span class="font-medium">
+                            Experienced travel professionals
+                        </span>
+
+                    </div>
+
+
+                    <div class="flex items-center gap-3">
+
+                        <div class="w-7 h-7 rounded-full bg-green-100
+                                    text-green-600 flex items-center justify-center">
+
+                            <i class="fa-solid fa-check text-sm"></i>
+
+                        </div>
+
+                        <span class="font-medium">
+                            Personalized travel experiences
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<section class="py-16 bg-blue-600 text-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+
+
+            <div class="counter-card">
+
+                <i class="fa-solid fa-earth-americas text-3xl mb-4"></i>
+
+                <h3 class="text-4xl font-extrabold">
+                    50+
+                </h3>
+
+                <p class="text-blue-100 mt-2">
+                    Destinations
+                </p>
+
+            </div>
+
+
+            <div class="counter-card">
+
+                <i class="fa-solid fa-users text-3xl mb-4"></i>
+
+                <h3 class="text-4xl font-extrabold">
+                    15K+
+                </h3>
+
+                <p class="text-blue-100 mt-2">
+                    Happy Travelers
+                </p>
+
+            </div>
+
+
+            <div class="counter-card">
+
+                <i class="fa-solid fa-route text-3xl mb-4"></i>
+
+                <h3 class="text-4xl font-extrabold">
+                    120+
+                </h3>
+
+                <p class="text-blue-100 mt-2">
+                    Tour Packages
+                </p>
+
+            </div>
+
+
+            <div class="counter-card">
+
+                <i class="fa-solid fa-award text-3xl mb-4"></i>
+
+                <h3 class="text-4xl font-extrabold">
+                    25+
+                </h3>
+
+                <p class="text-blue-100 mt-2">
+                    Travel Awards
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WHY CHOOSE US
+===================================================== -->
+
+<section class="py-20">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="text-center max-w-3xl mx-auto mb-14">
+
+            <span class="text-blue-600 font-bold uppercase
+                         tracking-wider text-sm">
+
+                Why Choose Us
+
+            </span>
+
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-3">
+
+                Making Travel Simple & Memorable
+
+            </h2>
+
+            <p class="text-gray-500 mt-4">
+
+                Everything you need for a smooth and unforgettable
+                travel experience.
+
+            </p>
+
+        </div>
+
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-7">
+
+
+            <!-- Feature 1 -->
+            <div class="feature-card bg-white rounded-3xl p-8 shadow-sm">
+
+                <div class="w-14 h-14 rounded-2xl bg-blue-100
+                            text-blue-600 flex items-center justify-center
+                            text-2xl mb-6">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+                <h3 class="text-xl font-bold mb-3">
+                    Safe & Secure
+                </h3>
+
+                <p class="text-gray-500 leading-7">
+
+                    Your safety is our priority.
+                    We work with trusted partners worldwide.
+
+                </p>
+
+            </div>
+
+
+            <!-- Feature 2 -->
+            <div class="feature-card bg-white rounded-3xl p-8 shadow-sm">
+
+                <div class="w-14 h-14 rounded-2xl bg-green-100
+                            text-green-600 flex items-center justify-center
+                            text-2xl mb-6">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                </div>
+
+                <h3 class="text-xl font-bold mb-3">
+                    Best Value
+                </h3>
+
+                <p class="text-gray-500 leading-7">
+
+                    Enjoy carefully selected travel packages
+                    at competitive prices.
+
+                </p>
+
+            </div>
+
+
+            <!-- Feature 3 -->
+            <div class="feature-card bg-white rounded-3xl p-8 shadow-sm">
+
+                <div class="w-14 h-14 rounded-2xl bg-purple-100
+                            text-purple-600 flex items-center justify-center
+                            text-2xl mb-6">
+
+                    <i class="fa-solid fa-headset"></i>
+
+                </div>
+
+                <h3 class="text-xl font-bold mb-3">
+                    24/7 Support
+                </h3>
+
+                <p class="text-gray-500 leading-7">
+
+                    Our travel experts are always ready
+                    to help whenever you need us.
+
+                </p>
+
+            </div>
+
+
+            <!-- Feature 4 -->
+            <div class="feature-card bg-white rounded-3xl p-8 shadow-sm">
+
+                <div class="w-14 h-14 rounded-2xl bg-orange-100
+                            text-orange-600 flex items-center justify-center
+                            text-2xl mb-6">
+
+                    <i class="fa-solid fa-map-location-dot"></i>
+
+                </div>
+
+                <h3 class="text-xl font-bold mb-3">
+                    Local Experts
+                </h3>
+
+                <p class="text-gray-500 leading-7">
+
+                    Get authentic experiences with help
+                    from experienced local experts.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TEAM
+===================================================== -->
+
+<section class="py-20 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="text-center mb-14">
+
+            <span class="text-blue-600 font-bold uppercase
+                         tracking-wider text-sm">
+
+                Meet Our Team
+
+            </span>
+
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-3">
+
+                The People Behind Wanderly
+
+            </h2>
+
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">
+
+                A passionate team dedicated to making
+                every journey special.
+
+            </p>
+
+        </div>
+
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+
+
+            <!-- Team 1 -->
+            <div class="team-card bg-gray-50 rounded-3xl overflow-hidden">
+
+                <div class="h-72 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80"
+                        alt="Alex Morgan"
+                        class="w-full h-full object-cover">
+
+                </div>
+
+                <div class="p-6 text-center">
+
+                    <h3 class="text-xl font-bold">
+                        Alex Morgan
+                    </h3>
+
+                    <p class="text-blue-600 font-medium mt-1">
+                        Founder & CEO
+                    </p>
+
+                    <div class="flex justify-center gap-3 mt-5">
+
+                        <a href="#"
+                           class="w-9 h-9 rounded-full bg-white
+                                  flex items-center justify-center
+                                  hover:bg-blue-600 hover:text-white transition">
+
+                            <i class="fa-brands fa-facebook-f"></i>
+
+                        </a>
+
+                        <a href="#"
+                           class="w-9 h-9 rounded-full bg-white
+                                  flex items-center justify-center
+                                  hover:bg-blue-600 hover:text-white transition">
+
+                            <i class="fa-brands fa-linkedin-in"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Team 2 -->
+            <div class="team-card bg-gray-50 rounded-3xl overflow-hidden">
+
+                <div class="h-72 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"
+                        alt="Emma Wilson"
+                        class="w-full h-full object-cover">
+
+                </div>
+
+                <div class="p-6 text-center">
+
+                    <h3 class="text-xl font-bold">
+                        Emma Wilson
+                    </h3>
+
+                    <p class="text-blue-600 font-medium mt-1">
+                        Travel Director
+                    </p>
+
+                    <div class="flex justify-center gap-3 mt-5">
+
+                        <a href="#"
+                           class="w-9 h-9 rounded-full bg-white
+                                  flex items-center justify-center
+                                  hover:bg-blue-600 hover:text-white transition">
+
+                            <i class="fa-brands fa-facebook-f"></i>
+
+                        </a>
+
+                        <a href="#"
+                           class="w-9 h-9 rounded-full bg-white
+                                  flex items-center justify-center
+                                  hover:bg-blue-600 hover:text-white transition">
+
+                            <i class="fa-brands fa-linkedin-in"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Team 3 -->
+            <div class="team-card bg-gray-50 rounded-3xl overflow-hidden">
+
+                <div class="h-72 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80"
+                        alt="Daniel Smith"
+                        class="w-full h-full object-cover">
+
+                </div>
+
+                <div class="p-6 text-center">
+
+                    <h3 class="text-xl font-bold">
+                        Daniel Smith
+                    </h3>
+
+                    <p class="text-blue-600 font-medium mt-1">
+                        Tour Manager
+                    </p>
+
+                    <div class="flex justify-center gap-3 mt-5">
+
+                        <a href="#"
+                           class="w-9 h-9 rounded-full bg-white
+                                  flex items-center justify-center
+                                  hover:bg-blue-600 hover:text-white transition">
+
+                            <i class="fa-brands fa-facebook-f"></i>
+
+                        </a>
+
+                        <a href="#"
+                           class="w-9 h-9 rounded-full bg-white
+                                  flex items-center justify-center
+                                  hover:bg-blue-600 hover:text-white transition">
+
+                            <i class="fa-brands fa-linkedin-in"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Team 4 -->
+            <div class="team-card bg-gray-50 rounded-3xl overflow-hidden">
+
+                <div class="h-72 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80"
+                        alt="Sophia Brown"
+                        class="w-full h-full object-cover">
+
+                </div>
+
+                <div class="p-6 text-center">
+
+                    <h3 class="text-xl font-bold">
+                        Sophia Brown
+                    </h3>
+
+                    <p class="text-blue-600 font-medium mt-1">
+                        Travel Consultant
+                    </p>
+
+                    <div class="flex justify-center gap-3 mt-5">
+
+                        <a href="#"
+                           class="w-9 h-9 rounded-full bg-white
+                                  flex items-center justify-center
+                                  hover:bg-blue-600 hover:text-white transition">
+
+                            <i class="fa-brands fa-facebook-f"></i>
+
+                        </a>
+
+                        <a href="#"
+                           class="w-9 h-9 rounded-full bg-white
+                                  flex items-center justify-center
+                                  hover:bg-blue-600 hover:text-white transition">
+
+                            <i class="fa-brands fa-linkedin-in"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="py-20 bg-blue-600 text-white">
+
+    <div class="max-w-5xl mx-auto px-5 text-center">
+
+        <i class="fa-solid fa-compass text-5xl mb-6"></i>
+
+        <h2 class="text-3xl md:text-5xl font-extrabold mb-5">
+
+            Let's Plan Your Next Adventure
+
+        </h2>
+
+        <p class="text-blue-100 max-w-2xl mx-auto mb-8">
+
+            Tell us where you want to go and we'll help
+            you create an unforgettable travel experience.
+
+        </p>
+
+        <a href="contact.html"
+           class="inline-flex items-center gap-2 bg-white text-blue-600
+                  px-7 py-3.5 rounded-full font-bold
+                  hover:bg-gray-100 transition">
+
+            Start Planning
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="bg-gray-950 text-gray-300">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14">
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+
+            <!-- Brand -->
+            <div>
+
+                <div class="flex items-center gap-2 text-2xl
+                            font-extrabold text-white mb-5">
+
+                    <i class="fa-solid fa-earth-americas"></i>
+
+                   Travel With Labib
+
+                </div>
+
+                <p class="text-gray-400 leading-7">
+
+                    Making your travel dreams come true with
+                    unforgettable experiences around the world.
+
+                </p>
+
+            </div>
+
+
+            <!-- Links -->
+            <div>
+
+                <h3 class="text-white font-bold text-lg mb-5">
+                    Quick Links
+                </h3>
+
+                <div class="space-y-3">
+
+                    <a href="index.html"
+                       class="block hover:text-white transition">
+                        Home
+                    </a>
+
+                    <a href="destinations.html"
+                       class="block hover:text-white transition">
+                        Destinations
+                    </a>
+
+                    <a href="tours.html"
+                       class="block hover:text-white transition">
+                        Tours
+                    </a>
+
+                    <a href="about.html"
+                       class="block hover:text-white transition">
+                        About
+                    </a>
+
+                    <a href="contact.html"
+                       class="block hover:text-white transition">
+                        Contact
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Services -->
+            <div>
+
+                <h3 class="text-white font-bold text-lg mb-5">
+                    Services
+                </h3>
+
+                <div class="space-y-3 text-gray-400">
+
+                    <p>Tour Packages</p>
+                    <p>Hotel Booking</p>
+                    <p>Flight Booking</p>
+                    <p>Travel Guide</p>
+                    <p>Travel Insurance</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Social -->
+            <div>
+
+                <h3 class="text-white font-bold text-lg mb-5">
+                    Follow Us
+                </h3>
+
+                <div class="flex gap-3">
+
+                    <a href="#"
+                       class="w-11 h-11 rounded-full bg-gray-800
+                              flex items-center justify-center
+                              hover:bg-blue-600 transition">
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+                    <a href="#"
+                       class="w-11 h-11 rounded-full bg-gray-800
+                              flex items-center justify-center
+                              hover:bg-pink-600 transition">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+                    <a href="#"
+                       class="w-11 h-11 rounded-full bg-gray-800
+                              flex items-center justify-center
+                              hover:bg-sky-500 transition">
+
+                        <i class="fa-brands fa-twitter"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="border-t border-gray-800 mt-12 pt-7 text-center text-gray-500">
+
+            © 2026 Travel With Labib. All rights reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     BACK TO TOP
+===================================================== -->
+
+<button id="backTop"
+        class="hidden fixed bottom-6 right-6 z-40
+               w-12 h-12 rounded-full bg-blue-600
+               hover:bg-blue-700 text-white shadow-lg">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+
+<!-- Shared JavaScript -->
+<script src="/script.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,1197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wanderly Tours | Explore Amazing Tours</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .navbar {
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .hero {
+            min-height: 500px;
+            background:
+                linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
+                url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000&q=85")
+                center/cover no-repeat;
+        }
+
+        .tour-card {
+            transition: all 0.35s ease;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+        }
+
+        .tour-image {
+            transition: transform 0.5s ease;
+        }
+
+        .tour-card:hover .tour-image {
+            transform: scale(1.08);
+        }
+
+        .filter-btn {
+            transition: all 0.25s ease;
+        }
+
+        .filter-btn.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .modal {
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            animation: modalIn 0.25s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .book-btn {
+            transition: all 0.25s ease;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        #backTop {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar fixed top-0 left-0 w-full z-50 bg-white/95">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="h-20 flex items-center justify-between">
+
+            <!-- Logo -->
+            <a href="index.html"
+               class="flex items-center gap-2 text-2xl font-extrabold text-blue-600">
+
+                <i class="fa-solid fa-earth-americas"></i>
+
+                <span>Travel With Labib</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center gap-8">
+
+                <a href="index.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                    Home
+                </a>
+
+                <a href="destinations.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                    Destinations
+                </a>
+
+                <a href="tours.html"
+                   class="text-blue-600 font-semibold">
+                    Tours
+                </a>
+
+                <a href="about.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                    About
+                </a>
+
+                <a href="contact.html"
+                   class="text-gray-600 hover:text-blue-600 font-medium transition">
+                    Contact
+                </a>
+
+                <a href="contact.html"
+                   class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-full font-semibold transition">
+                    Contact Us
+                </a>
+
+            </div>
+
+            <!-- Mobile Button -->
+            <button id="menuBtn"
+                    class="lg:hidden text-2xl text-gray-700"
+                    aria-label="Open menu">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu"
+             class="hidden lg:hidden pb-5">
+
+            <div class="flex flex-col gap-4">
+
+                <a href="index.html"
+                   class="py-2 hover:text-blue-600">
+                    Home
+                </a>
+
+                <a href="destinations.html"
+                   class="py-2 hover:text-blue-600">
+                    Destinations
+                </a>
+
+                <a href="tours.html"
+                   class="py-2 text-blue-600 font-semibold">
+                    Tours
+                </a>
+
+                <a href="about.html"
+                   class="py-2 hover:text-blue-600">
+                    About
+                </a>
+
+                <a href="contact.html"
+                   class="py-2 hover:text-blue-600">
+                    Contact
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero flex items-center justify-center text-center text-white pt-20">
+
+    <div class="max-w-4xl px-5">
+
+        <span class="inline-block bg-white/20 backdrop-blur-md px-5 py-2 rounded-full text-sm font-semibold mb-6">
+            <i class="fa-solid fa-compass mr-2"></i>
+            Discover Your Next Adventure
+        </span>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+            Find Your Perfect Tour
+        </h1>
+
+        <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+            Explore unforgettable destinations, exciting adventures
+            and carefully designed travel experiences.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SEARCH + FILTER
+===================================================== -->
+
+<section class="py-14 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <!-- Search -->
+        <div class="max-w-2xl mx-auto mb-10">
+
+            <div class="relative">
+
+                <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+                <input
+                    type="text"
+                    id="tourSearch"
+                    placeholder="Search tours..."
+                    class="w-full pl-14 pr-5 py-4 rounded-2xl border border-gray-200
+                           focus:outline-none focus:ring-2 focus:ring-blue-500
+                           shadow-sm"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Filters -->
+        <div class="flex flex-wrap justify-center gap-3">
+
+            <button
+                class="filter-btn active border border-gray-300 px-5 py-2.5 rounded-full font-medium"
+                data-category="all">
+                All Tours
+            </button>
+
+            <button
+                class="filter-btn border border-gray-300 px-5 py-2.5 rounded-full font-medium"
+                data-category="adventure">
+                Adventure
+            </button>
+
+            <button
+                class="filter-btn border border-gray-300 px-5 py-2.5 rounded-full font-medium"
+                data-category="beach">
+                Beach
+            </button>
+
+            <button
+                class="filter-btn border border-gray-300 px-5 py-2.5 rounded-full font-medium"
+                data-category="city">
+                City
+            </button>
+
+            <button
+                class="filter-btn border border-gray-300 px-5 py-2.5 rounded-full font-medium"
+                data-category="nature">
+                Nature
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TOURS
+===================================================== -->
+
+<section class="py-16">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <!-- Heading -->
+        <div class="text-center mb-12">
+
+            <span class="text-blue-600 font-bold uppercase tracking-wider text-sm">
+                Popular Experiences
+            </span>
+
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-3">
+                Explore Our Best Tours
+            </h2>
+
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">
+                Choose from our handpicked tours and create memories
+                that will last a lifetime.
+            </p>
+
+        </div>
+
+
+        <!-- Tour Grid -->
+        <div id="tourGrid"
+             class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+
+            <!-- TOUR 1 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="adventure"
+                 data-title="Swiss Alps Adventure">
+
+                <div class="relative h-64 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1000&q=80"
+                        alt="Swiss Alps"
+                        class="tour-image w-full h-full object-cover">
+
+                    <span class="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                        Adventure
+                    </span>
+
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
+                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        aria-label="Add to favorites">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        Switzerland
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Swiss Alps Adventure
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            7 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            4.9
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+                            <p class="text-2xl font-extrabold text-blue-600">
+                                $1,299
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            data-tour="Swiss Alps Adventure">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOUR 2 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="beach"
+                 data-title="Bali Paradise Escape">
+
+                <div class="relative h-64 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=80"
+                        alt="Bali"
+                        class="tour-image w-full h-full object-cover">
+
+                    <span class="absolute top-4 left-4 bg-cyan-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                        Beach
+                    </span>
+
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
+                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        aria-label="Add to favorites">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        Bali, Indonesia
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Bali Paradise Escape
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            5 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            4.8
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+                            <p class="text-2xl font-extrabold text-blue-600">
+                                $799
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            data-tour="Bali Paradise Escape">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOUR 3 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="city"
+                 data-title="Dubai Luxury Tour">
+
+                <div class="relative h-64 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1000&q=80"
+                        alt="Dubai"
+                        class="tour-image w-full h-full object-cover">
+
+                    <span class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                        City
+                    </span>
+
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
+                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        aria-label="Add to favorites">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        Dubai, UAE
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Dubai Luxury Tour
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            4 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            4.9
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+                            <p class="text-2xl font-extrabold text-blue-600">
+                                $999
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            data-tour="Dubai Luxury Tour">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOUR 4 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="nature"
+                 data-title="Nepal Mountain Trek">
+
+                <div class="relative h-64 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=80"
+                        alt="Nepal Mountains"
+                        class="tour-image w-full h-full object-cover">
+
+                    <span class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                        Nature
+                    </span>
+
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
+                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        aria-label="Add to favorites">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        Nepal
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Nepal Mountain Trek
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            8 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            4.7
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+                            <p class="text-2xl font-extrabold text-blue-600">
+                                $1,099
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            data-tour="Nepal Mountain Trek">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOUR 5 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="city"
+                 data-title="Paris City Experience">
+
+                <div class="relative h-64 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1000&q=80"
+                        alt="Paris"
+                        class="tour-image w-full h-full object-cover">
+
+                    <span class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                        City
+                    </span>
+
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
+                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        aria-label="Add to favorites">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        Paris, France
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Paris City Experience
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            5 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            4.8
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+                            <p class="text-2xl font-extrabold text-blue-600">
+                                $1,199
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            data-tour="Paris City Experience">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOUR 6 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="beach"
+                 data-title="Maldives Island Escape">
+
+                <div class="relative h-64 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1000&q=80"
+                        alt="Maldives"
+                        class="tour-image w-full h-full object-cover">
+
+                    <span class="absolute top-4 left-4 bg-cyan-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                        Beach
+                    </span>
+
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90
+                               flex items-center justify-center text-gray-600 hover:text-red-500"
+                        aria-label="Add to favorites">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-blue-600"></i>
+                        Maldives
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Maldives Island Escape
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            6 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            5.0
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+                            <p class="text-2xl font-extrabold text-blue-600">
+                                $1,499
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold"
+                            data-tour="Maldives Island Escape">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- No Results -->
+        <div id="noTourResults"
+             class="hidden text-center py-16">
+
+            <div class="text-6xl text-gray-300 mb-5">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700">
+                No tours found
+            </h3>
+
+            <p class="text-gray-500 mt-2">
+                Try another search or category.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="py-20 bg-blue-600 text-white">
+
+    <div class="max-w-5xl mx-auto px-5 text-center">
+
+        <i class="fa-solid fa-plane-departure text-5xl mb-6"></i>
+
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-5">
+            Ready For Your Next Adventure?
+        </h2>
+
+        <p class="text-blue-100 max-w-2xl mx-auto mb-8">
+            Let us help you plan the perfect journey.
+            Your unforgettable adventure starts here.
+        </p>
+
+        <a href="contact.html"
+           class="inline-flex items-center gap-2 bg-white text-blue-600
+                  px-7 py-3.5 rounded-full font-bold hover:bg-gray-100 transition">
+
+            Plan My Trip
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="bg-gray-950 text-gray-300">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14">
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+            <!-- Brand -->
+            <div>
+
+                <div class="flex items-center gap-2 text-2xl font-extrabold text-white mb-5">
+
+                    <i class="fa-solid fa-earth-americas"></i>
+                    Travel With Labib
+
+                </div>
+
+                <p class="text-gray-400 leading-7">
+                    Making your travel dreams come true with
+                    unforgettable experiences around the world.
+                </p>
+
+            </div>
+
+
+            <!-- Quick Links -->
+            <div>
+
+                <h3 class="text-white font-bold text-lg mb-5">
+                    Quick Links
+                </h3>
+
+                <div class="space-y-3">
+
+                    <a href="index.html" class="block hover:text-white transition">
+                        Home
+                    </a>
+
+                    <a href="destinations.html" class="block hover:text-white transition">
+                        Destinations
+                    </a>
+
+                    <a href="tours.html" class="block hover:text-white transition">
+                        Tours
+                    </a>
+
+                    <a href="about.html" class="block hover:text-white transition">
+                        About
+                    </a>
+
+                    <a href="contact.html" class="block hover:text-white transition">
+                        Contact
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Services -->
+            <div>
+
+                <h3 class="text-white font-bold text-lg mb-5">
+                    Services
+                </h3>
+
+                <div class="space-y-3 text-gray-400">
+
+                    <p>Tour Packages</p>
+                    <p>Hotel Booking</p>
+                    <p>Flight Booking</p>
+                    <p>Travel Guide</p>
+                    <p>Travel Insurance</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Social -->
+            <div>
+
+                <h3 class="text-white font-bold text-lg mb-5">
+                    Follow Us
+                </h3>
+
+                <div class="flex gap-3">
+
+                    <a href="#"
+                       class="w-11 h-11 rounded-full bg-gray-800
+                              flex items-center justify-center
+                              hover:bg-blue-600 transition">
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+                    <a href="#"
+                       class="w-11 h-11 rounded-full bg-gray-800
+                              flex items-center justify-center
+                              hover:bg-pink-600 transition">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+                    <a href="#"
+                       class="w-11 h-11 rounded-full bg-gray-800
+                              flex items-center justify-center
+                              hover:bg-sky-500 transition">
+
+                        <i class="fa-brands fa-twitter"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="border-t border-gray-800 mt-12 pt-7 text-center text-gray-500">
+
+            © 2026 Travel With Labib All rights reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     BOOKING MODAL
+===================================================== -->
+
+<div id="bookingModal"
+     class="modal hidden fixed inset-0 z-[100] bg-black/60
+            flex items-center justify-center p-5">
+
+    <div class="modal-content bg-white rounded-3xl w-full max-w-lg
+                max-h-[90vh] overflow-y-auto">
+
+        <!-- Modal Header -->
+        <div class="flex items-center justify-between p-6 border-b">
+
+            <div>
+
+                <span class="text-sm text-blue-600 font-semibold">
+                    Tour Booking
+                </span>
+
+                <h2 id="bookingTourName"
+                    class="text-2xl font-bold mt-1">
+                    Book Your Tour
+                </h2>
+
+            </div>
+
+            <button id="closeBookingModal"
+                    class="w-10 h-10 rounded-full bg-gray-100
+                           hover:bg-gray-200 text-gray-600">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- Form -->
+        <form id="bookingForm"
+              class="p-6 space-y-5">
+
+            <input type="hidden"
+                   id="selectedTour">
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Full Name
+                </label>
+
+                <input
+                    id="customerName"
+                    type="text"
+                    required
+                    placeholder="Enter your name"
+                    class="w-full px-4 py-3 border rounded-xl
+                           focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            </div>
+
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Email Address
+                </label>
+
+                <input
+                    id="customerEmail"
+                    type="email"
+                    required
+                    placeholder="Enter your email"
+                    class="w-full px-4 py-3 border rounded-xl
+                           focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            </div>
+
+
+            <div class="grid sm:grid-cols-2 gap-4">
+
+                <div>
+
+                    <label class="block font-semibold mb-2">
+                        Travel Date
+                    </label>
+
+                    <input
+                        id="travelDate"
+                        type="date"
+                        required
+                        class="w-full px-4 py-3 border rounded-xl
+                               focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                </div>
+
+
+                <div>
+
+                    <label class="block font-semibold mb-2">
+                        Guests
+                    </label>
+
+                    <input
+                        id="guestCount"
+                        type="number"
+                        min="1"
+                        max="20"
+                        value="1"
+                        required
+                        class="w-full px-4 py-3 border rounded-xl
+                               focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Special Request
+                </label>
+
+                <textarea
+                    id="specialRequest"
+                    rows="3"
+                    placeholder="Any special request?"
+                    class="w-full px-4 py-3 border rounded-xl
+                           focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700
+                       text-white py-4 rounded-xl font-bold transition">
+
+                <i class="fa-solid fa-paper-plane mr-2"></i>
+                Submit Booking Request
+
+            </button>
+
+        </form>
+
+
+        <!-- Success -->
+        <div id="bookingSuccess"
+             class="hidden p-8 text-center">
+
+            <div class="w-16 h-16 mx-auto rounded-full bg-green-100
+                        text-green-600 flex items-center justify-center
+                        text-3xl mb-5">
+
+                <i class="fa-solid fa-check"></i>
+
+            </div>
+
+            <h3 class="text-2xl font-bold">
+                Booking Request Sent!
+            </h3>
+
+            <p class="text-gray-500 mt-3">
+                Thank you for choosing Wanderly.
+                We will contact you shortly.
+            </p>
+
+            <button
+                id="successCloseBtn"
+                class="mt-6 bg-blue-600 text-white px-6 py-3
+                       rounded-xl font-semibold">
+
+                Done
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     BACK TO TOP
+===================================================== -->
+
+<button id="backTop"
+        class="hidden fixed bottom-6 right-6 z-40
+               w-12 h-12 rounded-full bg-blue-600
+               hover:bg-blue-700 text-white shadow-lg">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="/script.js"></script>
+
+</body>
+</html>
