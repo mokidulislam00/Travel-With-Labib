@@ -1,259 +1,1156 @@
 
 /* =========================================================
-   WANDERLY TOUR & TRAVEL
-   Global JavaScript
-   Supports:
-   1. index.html
-   2. destinations.html
-   3. tours.html
-   4. about.html
-   5. contact.html
-   ========================================================= */
+   TRAVEL WITH LABIB
+   GLOBAL JAVASCRIPT
+   Works with:
+   - index.html
+   - destinations.html
+   - tours.html
+   - about.html
+   - contact.html
+
+   Place this file at:
+   js/script.js
+
+   Then use on ALL HTML pages:
+   <script src="js/script.js"></script>
+========================================================= */
+
+"use strict";
+
+/* =========================================================
+   GLOBAL HELPERS
+========================================================= */
+
+const $ = (selector, parent = document) => {
+    return parent.querySelector(selector);
+};
+
+const $$ = (selector, parent = document) => {
+    return Array.from(parent.querySelectorAll(selector));
+};
+
+const on = (element, event, handler, options = false) => {
+    if (element) {
+        element.addEventListener(event, handler, options);
+    }
+};
+
+const showElement = (element) => {
+    if (!element) return;
+
+    element.classList.remove("hidden");
+    element.classList.add("show");
+
+    if (element.id === "backTop") {
+        element.classList.add("show");
+    }
+};
+
+const hideElement = (element) => {
+    if (!element) return;
+
+    element.classList.remove("show");
+
+    if (
+        element.id !== "mobileMenu" &&
+        element.id !== "destinationModal" &&
+        element.id !== "bookingModal"
+    ) {
+        element.classList.add("hidden");
+    }
+};
+
+
+/* =========================================================
+   DOM READY
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =====================================================
-       1. MOBILE NAVIGATION
-       ===================================================== */
+    initMobileMenu();
+    initNavbar();
+    initBackToTop();
 
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
+    initHomeCarousel();
+    initHomeSearch();
 
-    if (menuBtn && mobileMenu) {
+    initDestinationPage();
 
-        menuBtn.addEventListener("click", () => {
-            mobileMenu.classList.toggle("hidden");
+    initToursPage();
 
-            const icon = menuBtn.querySelector("i");
+    initAboutPage();
 
-            if (icon) {
-                if (mobileMenu.classList.contains("hidden")) {
-                    icon.classList.remove("fa-xmark");
-                    icon.classList.add("fa-bars");
-                } else {
-                    icon.classList.remove("fa-bars");
-                    icon.classList.add("fa-xmark");
-                }
-            }
-        });
+    initContactPage();
 
-        // Close mobile menu when clicking a link
-        const mobileLinks = mobileMenu.querySelectorAll("a");
+    initGlobalButtons();
 
-        mobileLinks.forEach(link => {
-            link.addEventListener("click", () => {
+    console.log("Travel With Labib JS loaded successfully.");
+
+});
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function initMobileMenu() {
+
+    const menuBtn = $("#menuBtn");
+    const mobileMenu = $("#mobileMenu");
+
+    if (!menuBtn || !mobileMenu) return;
+
+    let isOpen = false;
+
+    on(menuBtn, "click", () => {
+
+        isOpen = !isOpen;
+
+        if (isOpen) {
+
+            mobileMenu.classList.add("show");
+            mobileMenu.classList.remove("hidden");
+
+            menuBtn.innerHTML =
+                '<i class="fa-solid fa-xmark"></i>';
+
+        } else {
+
+            mobileMenu.classList.remove("show");
+
+            /*
+             * Some HTML versions use the custom
+             * .mobile-menu class while others may
+             * use Tailwind hidden.
+             */
+            if (mobileMenu.classList.contains("mobile-menu")) {
+                mobileMenu.classList.remove("hidden");
+            } else {
                 mobileMenu.classList.add("hidden");
+            }
 
-                const icon = menuBtn.querySelector("i");
+            menuBtn.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+        }
 
-                if (icon) {
-                    icon.classList.remove("fa-xmark");
-                    icon.classList.add("fa-bars");
-                }
-            });
+    });
+
+
+    /* Close menu after clicking a link */
+
+    $$("#mobileMenu a").forEach(link => {
+
+        on(link, "click", () => {
+
+            isOpen = false;
+
+            mobileMenu.classList.remove("show");
+
+            menuBtn.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+
         });
-    }
+
+    });
 
 
-    /* =====================================================
-       2. NAVBAR SCROLL EFFECT
-       ===================================================== */
+    /* Close when clicking outside */
 
-    const navbar = document.querySelector(".navbar");
+    on(document, "click", (event) => {
 
-    if (navbar) {
+        if (
+            isOpen &&
+            !mobileMenu.contains(event.target) &&
+            !menuBtn.contains(event.target)
+        ) {
 
-        const updateNavbar = () => {
+            isOpen = false;
+
+            mobileMenu.classList.remove("show");
+
+            menuBtn.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+function initNavbar() {
+
+    const navbar = $(".navbar");
+
+    const handleScroll = () => {
+
+        if (navbar) {
 
             if (window.scrollY > 30) {
-                navbar.classList.add(
-                    "shadow-lg",
-                    "bg-white/95",
-                    "backdrop-blur-md"
-                );
+                navbar.classList.add("scrolled");
             } else {
-                navbar.classList.remove(
-                    "shadow-lg",
-                    "bg-white/95",
-                    "backdrop-blur-md"
-                );
+                navbar.classList.remove("scrolled");
             }
-        };
 
-        window.addEventListener("scroll", updateNavbar);
+        }
 
-        updateNavbar();
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    handleScroll();
+
+}
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+function initBackToTop() {
+
+    const backTop = $("#backTop");
+
+    if (!backTop) return;
+
+    const updateButton = () => {
+
+        if (window.scrollY > 400) {
+
+            backTop.classList.add("show");
+
+        } else {
+
+            backTop.classList.remove("show");
+
+        }
+
+    };
+
+    window.addEventListener("scroll", updateButton);
+
+    updateButton();
+
+
+    on(backTop, "click", () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   HOMEPAGE HERO CAROUSEL
+========================================================= */
+
+function initHomeCarousel() {
+
+    const slides = $$(".slide");
+    const indicators = $$(".indicator");
+
+    const prevBtn = $("#prevBtn");
+    const nextBtn = $("#nextBtn");
+
+    if (!slides.length) return;
+
+    let currentSlide = 0;
+    let autoPlay = null;
+
+    const heroData = [
+
+        {
+            small: "Discover The World",
+
+            title:
+                'Explore The World, <span class="text-[#D98A78]">Create Memories.</span>',
+
+            text:
+                "Discover beautiful destinations, exciting adventures and unforgettable experiences."
+        },
+
+        {
+            small: "Beautiful Beaches",
+
+            title:
+                'Escape To <span class="text-[#D98A78]">Paradise.</span>',
+
+            text:
+                "Relax on beautiful beaches and experience unforgettable tropical adventures."
+        },
+
+        {
+            small: "Unforgettable Adventures",
+
+            title:
+                'Travel More, <span class="text-[#D98A78]">Live More.</span>',
+
+            text:
+                "Explore new cultures, meet amazing people and create memories that last forever."
+        }
+
+    ];
+
+
+    const heroSmall = $("#heroSmall");
+    const heroTitle = $("#heroTitle");
+    const heroText = $("#heroText");
+    const heroContent = $("#heroContent");
+
+
+    function updateHeroText(index) {
+
+        const data = heroData[index];
+
+        if (!data) return;
+
+        if (heroSmall) {
+            heroSmall.textContent = data.small;
+        }
+
+        if (heroTitle) {
+            heroTitle.innerHTML = data.title;
+        }
+
+        if (heroText) {
+            heroText.textContent = data.text;
+        }
+
     }
 
 
-    /* =====================================================
-       3. HERO CAROUSEL / SLIDER
-       ===================================================== */
+    function showSlide(index) {
 
-    const slides = document.querySelectorAll(".hero-slide");
-    const nextSlideBtn = document.getElementById("nextSlide");
-    const prevSlideBtn = document.getElementById("prevSlide");
-    const dots = document.querySelectorAll(".hero-dot");
-
-    if (slides.length > 0) {
-
-        let currentSlide = 0;
-        let autoSlide;
-
-        const showSlide = (index) => {
-
-            if (index >= slides.length) {
-                currentSlide = 0;
-            } else if (index < 0) {
-                currentSlide = slides.length - 1;
-            } else {
-                currentSlide = index;
-            }
-
-            slides.forEach((slide, i) => {
-
-                slide.classList.remove("opacity-100");
-                slide.classList.add("opacity-0");
-
-                if (i === currentSlide) {
-                    slide.classList.remove("opacity-0");
-                    slide.classList.add("opacity-100");
-                }
-            });
-
-            dots.forEach((dot, i) => {
-
-                dot.classList.remove(
-                    "bg-white",
-                    "scale-125"
-                );
-
-                dot.classList.add("bg-white/50");
-
-                if (i === currentSlide) {
-                    dot.classList.remove("bg-white/50");
-                    dot.classList.add(
-                        "bg-white",
-                        "scale-125"
-                    );
-                }
-            });
-        };
-
-
-        const nextSlide = () => {
-            showSlide(currentSlide + 1);
-        };
-
-
-        const previousSlide = () => {
-            showSlide(currentSlide - 1);
-        };
-
-
-        if (nextSlideBtn) {
-            nextSlideBtn.addEventListener("click", () => {
-                nextSlide();
-                restartAutoSlide();
-            });
+        if (index < 0) {
+            index = slides.length - 1;
         }
 
-
-        if (prevSlideBtn) {
-            prevSlideBtn.addEventListener("click", () => {
-                previousSlide();
-                restartAutoSlide();
-            });
+        if (index >= slides.length) {
+            index = 0;
         }
 
+        currentSlide = index;
 
-        dots.forEach((dot, index) => {
 
-            dot.addEventListener("click", () => {
-                showSlide(index);
-                restartAutoSlide();
-            });
+        slides.forEach((slide, i) => {
+
+            slide.classList.toggle(
+                "active",
+                i === currentSlide
+            );
 
         });
 
 
-        const startAutoSlide = () => {
+        indicators.forEach((indicator, i) => {
 
-            autoSlide = setInterval(() => {
-                nextSlide();
-            }, 5000);
+            indicator.classList.toggle(
+                "active",
+                i === currentSlide
+            );
 
-        };
-
-
-        const restartAutoSlide = () => {
-
-            clearInterval(autoSlide);
-            startAutoSlide();
-
-        };
+        });
 
 
-        showSlide(0);
-        startAutoSlide();
+        updateHeroText(currentSlide);
+
+
+        /* Restart content animation */
+
+        if (heroContent) {
+
+            heroContent.style.animation = "none";
+
+            void heroContent.offsetWidth;
+
+            heroContent.style.animation =
+                "fadeUp 0.8s ease";
+
+        }
+
     }
 
 
-    /* =====================================================
-       4. DESTINATION SEARCH
-       ===================================================== */
+    function nextSlide() {
 
-    const destinationSearch =
-        document.getElementById("destinationSearch");
+        showSlide(currentSlide + 1);
 
-    const destinationCards =
-        document.querySelectorAll(".destination-card");
+    }
+
+
+    function previousSlide() {
+
+        showSlide(currentSlide - 1);
+
+    }
+
+
+    function startAutoPlay() {
+
+        stopAutoPlay();
+
+        autoPlay = setInterval(() => {
+
+            nextSlide();
+
+        }, 5000);
+
+    }
+
+
+    function stopAutoPlay() {
+
+        if (autoPlay) {
+
+            clearInterval(autoPlay);
+
+            autoPlay = null;
+
+        }
+
+    }
+
+
+    on(nextBtn, "click", () => {
+
+        nextSlide();
+        startAutoPlay();
+
+    });
+
+
+    on(prevBtn, "click", () => {
+
+        previousSlide();
+        startAutoPlay();
+
+    });
+
+
+    indicators.forEach((indicator, index) => {
+
+        on(indicator, "click", () => {
+
+            showSlide(index);
+            startAutoPlay();
+
+        });
+
+    });
+
+
+    /* Pause while mouse is over hero */
+
+    const hero = $(".hero");
+
+    if (hero) {
+
+        on(hero, "mouseenter", stopAutoPlay);
+
+        on(hero, "mouseleave", startAutoPlay);
+
+    }
+
+
+    /* Keyboard controls */
+
+    on(document, "keydown", (event) => {
+
+        if (!slides.length) return;
+
+        if (event.key === "ArrowRight") {
+
+            nextSlide();
+            startAutoPlay();
+
+        }
+
+        if (event.key === "ArrowLeft") {
+
+            previousSlide();
+            startAutoPlay();
+
+        }
+
+    });
+
+
+    /* Touch swipe */
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    if (hero) {
+
+        on(hero, "touchstart", (event) => {
+
+            touchStartX =
+                event.changedTouches[0].screenX;
+
+        }, { passive: true });
+
+
+        on(hero, "touchend", (event) => {
+
+            touchEndX =
+                event.changedTouches[0].screenX;
+
+            const distance =
+                touchEndX - touchStartX;
+
+            if (Math.abs(distance) < 50) return;
+
+            if (distance < 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+
+            startAutoPlay();
+
+        }, { passive: true });
+
+    }
+
+
+    showSlide(0);
+
+    startAutoPlay();
+
+}
+
+
+/* =========================================================
+   HOMEPAGE SEARCH
+========================================================= */
+
+function initHomeSearch() {
+
+    const searchBtn = $("#searchBtn");
+
+    const destinationInput = $("#destination");
+    const dateInput = $("#date");
+    const travelersInput = $("#travelers");
+
+    if (!searchBtn) return;
+
+
+    /* Prevent selecting a past travel date */
+
+    if (dateInput) {
+
+        const today =
+            new Date().toISOString().split("T")[0];
+
+        dateInput.min = today;
+
+    }
+
+
+    on(searchBtn, "click", () => {
+
+        const destination =
+            destinationInput ?
+                destinationInput.value.trim() :
+                "";
+
+        const date =
+            dateInput ?
+                dateInput.value :
+                "";
+
+        const travelers =
+            travelersInput ?
+                travelersInput.value :
+                "1 Traveler";
+
+
+        if (!destination) {
+
+            showToast(
+                "Please enter a destination.",
+                "error"
+            );
+
+            if (destinationInput) {
+                destinationInput.focus();
+            }
+
+            return;
+        }
+
+
+        if (!date) {
+
+            showToast(
+                "Please select your travel date.",
+                "error"
+            );
+
+            if (dateInput) {
+                dateInput.focus();
+            }
+
+            return;
+        }
+
+
+        /*
+         * Save search information so the tours page
+         * can use it.
+         */
+
+        localStorage.setItem(
+            "travelSearch",
+            JSON.stringify({
+                destination,
+                date,
+                travelers
+            })
+        );
+
+
+        /*
+         * Redirect to tours page.
+         */
+
+        window.location.href =
+            `tours.html?destination=${encodeURIComponent(destination)}`;
+
+    });
+
+}
+
+
+/* =========================================================
+   DESTINATIONS PAGE
+========================================================= */
+
+function initDestinationPage() {
+
+    const grid = $("#destinationGrid");
+
+    /*
+     * If the destination page doesn't exist,
+     * safely stop here.
+     */
+
+    if (!grid) return;
+
+
+    const cards =
+        $$(".destination-card", grid);
+
+    const filterButtons =
+        $$(".filter-btn");
+
+    const searchInput =
+        $("#destinationSearch");
 
     const noResults =
-        document.getElementById("noResults");
+        $("#noResults");
+
 
     let activeCategory = "all";
 
 
-    const filterDestinations = () => {
+    /* -----------------------------------------------------
+       FILTER + SEARCH
+    ----------------------------------------------------- */
 
-        if (destinationCards.length === 0) {
-            return;
-        }
+    function filterDestinations() {
 
-        const searchValue =
-            destinationSearch
-                ? destinationSearch.value
-                    .toLowerCase()
+        const searchTerm =
+            searchInput ?
+                searchInput.value
                     .trim()
-                : "";
+                    .toLowerCase() :
+                "";
 
 
         let visibleCount = 0;
 
 
-        destinationCards.forEach(card => {
-
-            const text =
-                card.textContent.toLowerCase();
+        cards.forEach(card => {
 
             const category =
-                card.dataset.category
-                ? card.dataset.category.toLowerCase()
-                : "all";
+                (
+                    card.dataset.category || ""
+                ).toLowerCase();
 
 
-            const matchesSearch =
-                text.includes(searchValue);
+            const name =
+                (
+                    card.dataset.name ||
+                    $(".text-2xl", card)?.textContent ||
+                    ""
+                ).toLowerCase();
 
-            const matchesCategory =
+
+            const categoryMatch =
                 activeCategory === "all" ||
                 category === activeCategory;
 
 
-            if (matchesSearch && matchesCategory) {
+            const searchMatch =
+                !searchTerm ||
+                name.includes(searchTerm) ||
+                category.includes(searchTerm);
+
+
+            const shouldShow =
+                categoryMatch &&
+                searchMatch;
+
+
+            if (shouldShow) {
+
+                card.classList.remove("hidden-card");
+                card.classList.remove("hidden");
+
+                visibleCount++;
+
+            } else {
+
+                card.classList.add("hidden-card");
+
+            }
+
+        });
+
+
+        if (noResults) {
+
+            if (visibleCount === 0) {
+
+                noResults.classList.remove("hidden");
+
+            } else {
+
+                noResults.classList.add("hidden");
+
+            }
+
+        }
+
+    }
+
+
+    /* -----------------------------------------------------
+       FILTER BUTTONS
+    ----------------------------------------------------- */
+
+    filterButtons.forEach(button => {
+
+        on(button, "click", () => {
+
+            activeCategory =
+                (
+                    button.dataset.category ||
+                    "all"
+                ).toLowerCase();
+
+
+            filterButtons.forEach(btn => {
+
+                btn.classList.remove("active");
+
+            });
+
+
+            button.classList.add("active");
+
+            filterDestinations();
+
+        });
+
+    });
+
+
+    /* -----------------------------------------------------
+       SEARCH
+    ----------------------------------------------------- */
+
+    on(searchInput, "input", () => {
+
+        filterDestinations();
+
+    });
+
+
+    /* -----------------------------------------------------
+       FAVORITES
+    ----------------------------------------------------- */
+
+    initDestinationFavorites();
+
+
+    /* -----------------------------------------------------
+       DESTINATION DETAILS MODAL
+    ----------------------------------------------------- */
+
+    initDestinationModal();
+
+}
+
+
+/* =========================================================
+   DESTINATION FAVORITES
+========================================================= */
+
+function initDestinationFavorites() {
+
+    const buttons =
+        $$(".favorite-btn");
+
+    if (!buttons.length) return;
+
+
+    let favorites = [];
+
+    try {
+
+        favorites =
+            JSON.parse(
+                localStorage.getItem(
+                    "favoriteDestinations"
+                )
+            ) || [];
+
+    } catch (error) {
+
+        favorites = [];
+
+    }
+
+
+    buttons.forEach(button => {
+
+        const card =
+            button.closest(".destination-card");
+
+        if (!card) return;
+
+
+        const name =
+            card.dataset.name ||
+            $(".text-2xl", card)?.textContent.trim() ||
+            "Destination";
+
+
+        const icon =
+            $("i", button);
+
+
+        /* Restore saved state */
+
+        if (favorites.includes(name)) {
+
+            button.classList.add("active");
+
+            if (icon) {
+
+                icon.classList.remove("fa-regular");
+                icon.classList.add("fa-solid");
+
+            }
+
+        }
+
+
+        on(button, "click", (event) => {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+
+            const index =
+                favorites.indexOf(name);
+
+
+            if (index === -1) {
+
+                favorites.push(name);
+
+                button.classList.add("active");
+
+                if (icon) {
+
+                    icon.classList.remove("fa-regular");
+                    icon.classList.add("fa-solid");
+
+                }
+
+                showToast(
+                    `${name} added to favorites.`,
+                    "success"
+                );
+
+            } else {
+
+                favorites.splice(index, 1);
+
+                button.classList.remove("active");
+
+                if (icon) {
+
+                    icon.classList.remove("fa-solid");
+                    icon.classList.add("fa-regular");
+
+                }
+
+                showToast(
+                    `${name} removed from favorites.`,
+                    "success"
+                );
+
+            }
+
+
+            localStorage.setItem(
+                "favoriteDestinations",
+                JSON.stringify(favorites)
+            );
+
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   DESTINATION DETAILS MODAL
+========================================================= */
+
+function initDestinationModal() {
+
+    const modal =
+        $("#destinationModal");
+
+    const closeModal =
+        $("#closeModal");
+
+    const modalImage =
+        $("#modalImage");
+
+    const modalTitle =
+        $("#modalTitle");
+
+    const modalDescription =
+        $("#modalDescription");
+
+    const detailButtons =
+        $$(".details-btn");
+
+
+    if (!modal || !detailButtons.length) return;
+
+
+    function openModal(data) {
+
+        if (modalImage) {
+
+            modalImage.src =
+                data.image || "";
+
+            modalImage.alt =
+                data.name || "Destination";
+
+        }
+
+
+        if (modalTitle) {
+
+            modalTitle.textContent =
+                data.name || "Destination";
+
+        }
+
+
+        if (modalDescription) {
+
+            modalDescription.textContent =
+                data.description ||
+                "Discover this amazing destination.";
+
+        }
+
+
+        modal.classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeDestinationModal() {
+
+        modal.classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    detailButtons.forEach(button => {
+
+        on(button, "click", () => {
+
+            openModal({
+
+                name:
+                    button.dataset.name,
+
+                description:
+                    button.dataset.description,
+
+                image:
+                    button.dataset.image
+
+            });
+
+        });
+
+    });
+
+
+    on(closeModal, "click", closeDestinationModal);
+
+
+    /* Click outside modal box */
+
+    on(modal, "click", (event) => {
+
+        if (event.target === modal) {
+
+            closeDestinationModal();
+
+        }
+
+    });
+
+
+    /* ESC */
+
+    on(document, "keydown", (event) => {
+
+        if (
+            event.key === "Escape" &&
+            modal.classList.contains("show")
+        ) {
+
+            closeDestinationModal();
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   TOURS PAGE
+========================================================= */
+
+function initToursPage() {
+
+    const tourCards =
+        $$(".tour-card");
+
+    const tourSearch =
+        $("#tourSearch");
+
+    const filterButtons =
+        $$(".filter-btn");
+
+
+    /*
+     * If there are no tour elements,
+     * this page simply doesn't need this section.
+     */
+
+    if (
+        !tourCards.length &&
+        !tourSearch &&
+        !filterButtons.length
+    ) {
+        return;
+    }
+
+
+    let activeCategory = "all";
+
+
+    /* -----------------------------------------------------
+       TOUR FILTERING
+    ----------------------------------------------------- */
+
+    function filterTours() {
+
+        const term =
+            tourSearch ?
+                tourSearch.value
+                    .trim()
+                    .toLowerCase() :
+                "";
+
+
+        let visibleCount = 0;
+
+
+        tourCards.forEach(card => {
+
+            const category =
+                (
+                    card.dataset.category || ""
+                ).toLowerCase();
+
+
+            const name =
+                (
+                    card.dataset.name ||
+                    $(".tour-title", card)?.textContent ||
+                    $(".text-2xl", card)?.textContent ||
+                    ""
+                ).toLowerCase();
+
+
+            const location =
+                (
+                    card.dataset.location || ""
+                ).toLowerCase();
+
+
+            const categoryMatch =
+                activeCategory === "all" ||
+                category === activeCategory;
+
+
+            const searchMatch =
+                !term ||
+                name.includes(term) ||
+                location.includes(term) ||
+                category.includes(term);
+
+
+            const visible =
+                categoryMatch &&
+                searchMatch;
+
+
+            if (visible) {
 
                 card.classList.remove("hidden");
+                card.classList.remove("hidden-card");
 
                 visibleCount++;
 
@@ -266,449 +1163,55 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
 
+        const noResults =
+            $("#tourNoResults") ||
+            $("#noTourResults") ||
+            $("#noResults");
+
+
         if (noResults) {
 
-            if (visibleCount === 0) {
-                noResults.classList.remove("hidden");
-            } else {
-                noResults.classList.add("hidden");
-            }
+            noResults.classList.toggle(
+                "hidden",
+                visibleCount !== 0
+            );
 
         }
-    };
-
-
-    if (destinationSearch) {
-
-        destinationSearch.addEventListener(
-            "input",
-            filterDestinations
-        );
 
     }
 
 
-    /* =====================================================
-       5. DESTINATION CATEGORY FILTER
-       ===================================================== */
-
-    const filterButtons =
-        document.querySelectorAll(".filter-btn");
-
+    /* -----------------------------------------------------
+       FILTER BUTTONS
+    ----------------------------------------------------- */
 
     filterButtons.forEach(button => {
 
-        button.addEventListener("click", () => {
+        on(button, "click", () => {
+
+            /*
+             * Only use filter buttons that belong
+             * to the tours page.
+             */
+
+            const category =
+                button.dataset.category;
+
+            if (!category) return;
+
 
             activeCategory =
-                button.dataset.category
-                ? button.dataset.category.toLowerCase()
-                : "all";
+                category.toLowerCase();
 
 
             filterButtons.forEach(btn => {
 
-                btn.classList.remove(
-                    "bg-indigo-600",
-                    "text-white"
-                );
-
-                btn.classList.add(
-                    "bg-white",
-                    "text-gray-700"
-                );
+                btn.classList.remove("active");
 
             });
 
 
-            button.classList.remove(
-                "bg-white",
-                "text-gray-700"
-            );
-
-            button.classList.add(
-                "bg-indigo-600",
-                "text-white"
-            );
-
-
-            filterDestinations();
-
-        });
-
-    });
-
-
-    /* =====================================================
-       6. DESTINATION FAVORITE / HEART BUTTON
-       ===================================================== */
-
-    const favoriteButtons =
-        document.querySelectorAll(".favorite-btn");
-
-
-    favoriteButtons.forEach(button => {
-
-        button.addEventListener("click", event => {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-
-            const icon =
-                button.querySelector("i");
-
-
-            const isFavorite =
-                button.dataset.favorite === "true";
-
-
-            if (isFavorite) {
-
-                button.dataset.favorite = "false";
-
-                button.classList.remove(
-                    "text-red-500",
-                    "bg-red-50"
-                );
-
-
-                if (icon) {
-
-                    icon.classList.remove("fa-solid");
-                    icon.classList.add("fa-regular");
-
-                }
-
-            } else {
-
-                button.dataset.favorite = "true";
-
-                button.classList.add(
-                    "text-red-500",
-                    "bg-red-50"
-                );
-
-
-                if (icon) {
-
-                    icon.classList.remove("fa-regular");
-                    icon.classList.add("fa-solid");
-
-                }
-
-            }
-
-        });
-
-    });
-
-
-    /* =====================================================
-       7. DESTINATION DETAILS MODAL
-       ===================================================== */
-
-    const destinationModal =
-        document.getElementById("destinationModal");
-
-    const closeModal =
-        document.getElementById("closeModal");
-
-    const modalTitle =
-        document.getElementById("modalTitle");
-
-    const modalDescription =
-        document.getElementById("modalDescription");
-
-    const modalImage =
-        document.getElementById("modalImage");
-
-
-    const detailsButtons =
-        document.querySelectorAll(".details-btn");
-
-
-    const hideDestinationModal = () => {
-
-        if (!destinationModal) {
-            return;
-        }
-
-        destinationModal.classList.add("hidden");
-
-        document.body.classList.remove(
-            "overflow-hidden"
-        );
-
-    };
-
-
-    const showDestinationModal = (button) => {
-
-        if (!destinationModal) {
-            return;
-        }
-
-
-        const card =
-            button.closest(".destination-card");
-
-
-        const title =
-            button.dataset.title ||
-            (
-                card &&
-                card.querySelector("h3")
-                ? card.querySelector("h3").textContent.trim()
-                : "Beautiful Destination"
-            );
-
-
-        const description =
-            button.dataset.description ||
-            (
-                card &&
-                card.dataset.description
-                ? card.dataset.description
-                : "Explore this amazing destination with Wanderly Tour & Travel."
-            );
-
-
-        const image =
-            button.dataset.image ||
-            (
-                card &&
-                card.querySelector("img")
-                ? card.querySelector("img").src
-                : ""
-            );
-
-
-        if (modalTitle) {
-            modalTitle.textContent = title;
-        }
-
-
-        if (modalDescription) {
-            modalDescription.textContent = description;
-        }
-
-
-        if (modalImage && image) {
-            modalImage.src = image;
-        }
-
-
-        destinationModal.classList.remove("hidden");
-
-        document.body.classList.add(
-            "overflow-hidden"
-        );
-
-    };
-
-
-    detailsButtons.forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            showDestinationModal(button);
-
-        });
-
-    });
-
-
-    if (closeModal) {
-
-        closeModal.addEventListener(
-            "click",
-            hideDestinationModal
-        );
-
-    }
-
-
-    if (destinationModal) {
-
-        destinationModal.addEventListener(
-            "click",
-            event => {
-
-                if (
-                    event.target === destinationModal
-                ) {
-
-                    hideDestinationModal();
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       8. ESC KEY
-       ===================================================== */
-
-    document.addEventListener("keydown", event => {
-
-        if (event.key === "Escape") {
-
-            hideDestinationModal();
-
-        }
-
-    });
-
-
-    /* =====================================================
-       9. TOURS SEARCH
-       ===================================================== */
-
-    const tourSearch =
-        document.getElementById("tourSearch");
-
-    const tourCards =
-        document.querySelectorAll(".tour-card");
-
-    const tourNoResults =
-        document.getElementById("tourNoResults");
-
-    let activeTourCategory = "all";
-
-
-    const filterTours = () => {
-
-        if (tourCards.length === 0) {
-            return;
-        }
-
-
-        const searchValue =
-            tourSearch
-                ? tourSearch.value.toLowerCase().trim()
-                : "";
-
-
-        let visibleTours = 0;
-
-
-        tourCards.forEach(card => {
-
-            const text =
-                card.textContent.toLowerCase();
-
-
-            const category =
-                card.dataset.category
-                ? card.dataset.category.toLowerCase()
-                : "all";
-
-
-            const matchesSearch =
-                text.includes(searchValue);
-
-
-            const matchesCategory =
-                activeTourCategory === "all" ||
-                category === activeTourCategory;
-
-
-            if (
-                matchesSearch &&
-                matchesCategory
-            ) {
-
-                card.classList.remove("hidden");
-
-                visibleTours++;
-
-            } else {
-
-                card.classList.add("hidden");
-
-            }
-
-        });
-
-
-        if (tourNoResults) {
-
-            if (visibleTours === 0) {
-
-                tourNoResults.classList.remove(
-                    "hidden"
-                );
-
-            } else {
-
-                tourNoResults.classList.add(
-                    "hidden"
-                );
-
-            }
-
-        }
-
-    };
-
-
-    if (tourSearch) {
-
-        tourSearch.addEventListener(
-            "input",
-            filterTours
-        );
-
-    }
-
-
-    /* =====================================================
-       10. TOUR CATEGORY FILTER
-       ===================================================== */
-
-    const tourFilterButtons =
-        document.querySelectorAll(".tour-filter-btn");
-
-
-    tourFilterButtons.forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            activeTourCategory =
-                button.dataset.category
-                ? button.dataset.category.toLowerCase()
-                : "all";
-
-
-            tourFilterButtons.forEach(btn => {
-
-                btn.classList.remove(
-                    "bg-indigo-600",
-                    "text-white"
-                );
-
-                btn.classList.add(
-                    "bg-white",
-                    "text-gray-700"
-                );
-
-            });
-
-
-            button.classList.remove(
-                "bg-white",
-                "text-gray-700"
-            );
-
-            button.classList.add(
-                "bg-indigo-600",
-                "text-white"
-            );
-
+            button.classList.add("active");
 
             filterTours();
 
@@ -717,683 +1220,291 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* =====================================================
-       11. TOUR BOOKING MODAL
-       ===================================================== */
+    /* -----------------------------------------------------
+       SEARCH
+    ----------------------------------------------------- */
 
-    const bookingModal =
-        document.getElementById("bookingModal");
-
-    const closeBookingModal =
-        document.getElementById("closeBookingModal");
-
-    const bookingForm =
-        document.getElementById("bookingForm");
-
-    const bookingTourName =
-        document.getElementById("bookingTourName");
-
-    const bookingTourInput =
-        document.getElementById("bookingTour");
+    on(tourSearch, "input", filterTours);
 
 
-    const bookButtons =
-        document.querySelectorAll(".book-tour-btn");
+    /* -----------------------------------------------------
+       LOAD SEARCH FROM HOMEPAGE
+    ----------------------------------------------------- */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
 
 
-    const openBookingModal = (button) => {
-
-        if (!bookingModal) {
-            return;
-        }
+    const destinationFromURL =
+        params.get("destination");
 
 
-        const card =
-            button.closest(".tour-card");
+    let savedSearch = null;
 
+    try {
 
-        const tourName =
-            button.dataset.tour ||
-            (
-                card &&
-                card.querySelector("h3")
-                ? card.querySelector("h3").textContent.trim()
-                : "Selected Tour"
+        savedSearch =
+            JSON.parse(
+                localStorage.getItem(
+                    "travelSearch"
+                )
             );
 
+    } catch (error) {
 
-        if (bookingTourName) {
-            bookingTourName.textContent = tourName;
-        }
-
-
-        if (bookingTourInput) {
-            bookingTourInput.value = tourName;
-        }
-
-
-        bookingModal.classList.remove("hidden");
-
-        document.body.classList.add(
-            "overflow-hidden"
-        );
-
-    };
-
-
-    const closeBooking = () => {
-
-        if (!bookingModal) {
-            return;
-        }
-
-        bookingModal.classList.add("hidden");
-
-        document.body.classList.remove(
-            "overflow-hidden"
-        );
-
-    };
-
-
-    bookButtons.forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            openBookingModal(button);
-
-        });
-
-    });
-
-
-    if (closeBookingModal) {
-
-        closeBookingModal.addEventListener(
-            "click",
-            closeBooking
-        );
+        savedSearch = null;
 
     }
 
 
-    if (bookingModal) {
-
-        bookingModal.addEventListener(
-            "click",
-            event => {
-
-                if (event.target === bookingModal) {
-                    closeBooking();
-                }
-
-            }
-        );
-
-    }
+    const searchDestination =
+        destinationFromURL ||
+        savedSearch?.destination ||
+        "";
 
 
-    /* =====================================================
-       12. BOOKING FORM
-       ===================================================== */
+    if (
+        searchDestination &&
+        tourSearch
+    ) {
 
-    if (bookingForm) {
+        tourSearch.value =
+            searchDestination;
 
-        bookingForm.addEventListener(
-            "submit",
-            event => {
-
-                event.preventDefault();
-
-
-                const name =
-                    document.getElementById("bookingName");
-
-                const email =
-                    document.getElementById("bookingEmail");
-
-                const date =
-                    document.getElementById("bookingDate");
-
-                const guests =
-                    document.getElementById("bookingGuests");
-
-                const success =
-                    document.getElementById("bookingSuccess");
-
-
-                let valid = true;
-
-
-                // Name
-                if (
-                    name &&
-                    name.value.trim().length < 2
-                ) {
-
-                    name.classList.add(
-                        "border-red-500"
-                    );
-
-                    valid = false;
-
-                } else if (name) {
-
-                    name.classList.remove(
-                        "border-red-500"
-                    );
-
-                }
-
-
-                // Email
-                if (
-                    email &&
-                    !isValidEmail(email.value)
-                ) {
-
-                    email.classList.add(
-                        "border-red-500"
-                    );
-
-                    valid = false;
-
-                } else if (email) {
-
-                    email.classList.remove(
-                        "border-red-500"
-                    );
-
-                }
-
-
-                // Date
-                if (
-                    date &&
-                    !date.value
-                ) {
-
-                    date.classList.add(
-                        "border-red-500"
-                    );
-
-                    valid = false;
-
-                } else if (date) {
-
-                    date.classList.remove(
-                        "border-red-500"
-                    );
-
-                }
-
-
-                // Guests
-                if (
-                    guests &&
-                    (
-                        !guests.value ||
-                        Number(guests.value) < 1
-                    )
-                ) {
-
-                    guests.classList.add(
-                        "border-red-500"
-                    );
-
-                    valid = false;
-
-                } else if (guests) {
-
-                    guests.classList.remove(
-                        "border-red-500"
-                    );
-
-                }
-
-
-                if (!valid) {
-
-                    showToast(
-                        "Please complete all required fields.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                if (success) {
-
-                    success.classList.remove(
-                        "hidden"
-                    );
-
-                }
-
-
-                showToast(
-                    "Booking request submitted successfully!",
-                    "success"
-                );
-
-
-                setTimeout(() => {
-
-                    bookingForm.reset();
-
-                    if (success) {
-                        success.classList.add(
-                            "hidden"
-                        );
-                    }
-
-                    closeBooking();
-
-                }, 2500);
-
-            }
-        );
+        filterTours();
 
     }
 
 
-    /* =====================================================
-       13. CONTACT FORM
-       ===================================================== */
+    /* -----------------------------------------------------
+       BOOKING SYSTEM
+    ----------------------------------------------------- */
 
-    const contactForm =
-        document.getElementById("contactForm");
+    initBookingModal();
 
+}
 
-    if (contactForm) {
 
-        contactForm.addEventListener(
-            "submit",
-            event => {
+/* =========================================================
+   BOOKING MODAL
+========================================================= */
 
-                event.preventDefault();
+function initBookingModal() {
 
+    const bookingModal =
+        $("#bookingModal");
 
-                const name =
-                    document.getElementById("contactName");
+    const bookingForm =
+        $("#bookingForm");
 
-                const email =
-                    document.getElementById("contactEmail");
 
-                const message =
-                    document.getElementById("contactMessage");
+    /*
+     * Support multiple possible close button IDs.
+     */
 
+    const closeBooking =
+        $("#closeBookingModal") ||
+        $("#closeBooking") ||
+        $(".close-booking");
 
-                const nameError =
-                    document.getElementById("nameError");
 
-                const emailError =
-                    document.getElementById("emailError");
-
-                const messageError =
-                    document.getElementById("messageError");
-
-
-                const success =
-                    document.getElementById("contactSuccess");
-
-
-                let valid = true;
-
-
-                /* Name */
-
-                if (
-                    !name ||
-                    name.value.trim().length < 2
-                ) {
-
-                    if (nameError) {
-                        nameError.classList.remove(
-                            "hidden"
-                        );
-                    }
-
-                    valid = false;
-
-                } else {
-
-                    if (nameError) {
-                        nameError.classList.add(
-                            "hidden"
-                        );
-                    }
-
-                }
-
-
-                /* Email */
-
-                if (
-                    !email ||
-                    !isValidEmail(email.value)
-                ) {
-
-                    if (emailError) {
-                        emailError.classList.remove(
-                            "hidden"
-                        );
-                    }
-
-                    valid = false;
-
-                } else {
-
-                    if (emailError) {
-                        emailError.classList.add(
-                            "hidden"
-                        );
-                    }
-
-                }
-
-
-                /* Message */
-
-                if (
-                    !message ||
-                    message.value.trim().length < 10
-                ) {
-
-                    if (messageError) {
-                        messageError.classList.remove(
-                            "hidden"
-                        );
-                    }
-
-                    valid = false;
-
-                } else {
-
-                    if (messageError) {
-                        messageError.classList.add(
-                            "hidden"
-                        );
-                    }
-
-                }
-
-
-                if (!valid) {
-
-                    showToast(
-                        "Please fix the highlighted fields.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                if (success) {
-
-                    success.classList.remove(
-                        "hidden"
-                    );
-
-                }
-
-
-                showToast(
-                    "Your message has been sent successfully!",
-                    "success"
-                );
-
-
-                contactForm.reset();
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       14. NEW CONTACT MESSAGE BUTTON
-       ===================================================== */
-
-    const newMessageBtn =
-        document.getElementById("newMessageBtn");
-
-
-    if (newMessageBtn) {
-
-        newMessageBtn.addEventListener(
-            "click",
-            () => {
-
-                if (contactForm) {
-                    contactForm.reset();
-                    contactForm.classList.remove(
-                        "hidden"
-                    );
-                }
-
-
-                const success =
-                    document.getElementById(
-                        "contactSuccess"
-                    );
-
-
-                if (success) {
-
-                    success.classList.add(
-                        "hidden"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       15. FAQ ACCORDION
-       ===================================================== */
-
-    const faqButtons =
-        document.querySelectorAll(".faq-btn");
-
-
-    faqButtons.forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            const answer =
-                button.nextElementSibling;
-
-
-            if (!answer) {
-                return;
-            }
-
-
-            const icon =
-                button.querySelector("i");
-
-
-            const isOpen =
-                !answer.classList.contains(
-                    "hidden"
-                );
-
-
-            // Close all FAQ answers
-            document.querySelectorAll(
-                ".faq-answer"
-            ).forEach(item => {
-
-                item.classList.add("hidden");
-
-            });
-
-
-            // Reset all icons
-            document.querySelectorAll(
-                ".faq-btn i"
-            ).forEach(item => {
-
-                item.classList.remove(
-                    "fa-minus"
-                );
-
-                item.classList.add(
-                    "fa-plus"
-                );
-
-            });
-
-
-            // Open selected FAQ
-            if (!isOpen) {
-
-                answer.classList.remove(
-                    "hidden"
-                );
-
-
-                if (icon) {
-
-                    icon.classList.remove(
-                        "fa-plus"
-                    );
-
-                    icon.classList.add(
-                        "fa-minus"
-                    );
-
-                }
-
-            }
-
-        });
-
-    });
-
-
-    /* =====================================================
-       16. BACK TO TOP
-       ===================================================== */
-
-    const backTop =
-        document.getElementById("backTop");
-
-
-    if (backTop) {
-
-        window.addEventListener(
-            "scroll",
-            () => {
-
-                if (window.scrollY > 400) {
-
-                    backTop.classList.remove(
-                        "opacity-0",
-                        "pointer-events-none"
-                    );
-
-                    backTop.classList.add(
-                        "opacity-100"
-                    );
-
-                } else {
-
-                    backTop.classList.remove(
-                        "opacity-100"
-                    );
-
-                    backTop.classList.add(
-                        "opacity-0",
-                        "pointer-events-none"
-                    );
-
-                }
-
-            }
+    const bookingButtons =
+        $(
+            ".book-tour-btn, " +
+            ".book-btn, " +
+            "[data-book-tour]"
         );
 
 
-        backTop.addEventListener(
-            "click",
-            () => {
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-    }
+    if (!bookingModal && !bookingForm) return;
 
 
-    /* =====================================================
-       17. SMOOTH SCROLL
-       ===================================================== */
-
-    document.querySelectorAll(
-        'a[href^="#"]'
-    ).forEach(link => {
-
-        link.addEventListener(
-            "click",
-            event => {
-
-                const targetId =
-                    link.getAttribute("href");
+    const tourNameInput =
+        $("#bookingTour") ||
+        $("#selectedTour") ||
+        $("#tourName");
 
 
-                if (
-                    !targetId ||
-                    targetId === "#"
-                ) {
-                    return;
-                }
+    const bookingName =
+        $("#bookingName") ||
+        $("#name");
 
 
-                const target =
-                    document.querySelector(
-                        targetId
-                    );
+    const bookingEmail =
+        $("#bookingEmail") ||
+        $("#email");
 
 
-                if (target) {
+    const bookingPhone =
+        $("#bookingPhone") ||
+        $("#phone");
 
-                    event.preventDefault();
-
-
-                    target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-
-                }
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       18. SET MINIMUM BOOKING DATE = TODAY
-       ===================================================== */
 
     const bookingDate =
-        document.getElementById("bookingDate");
+        $("#bookingDate") ||
+        $("#date");
 
+
+    const bookingGuests =
+        $("#bookingGuests") ||
+        $("#guests") ||
+        $("#travelers");
+
+
+    const bookingMessage =
+        $("#bookingMessage") ||
+        $("#message");
+
+
+    function openBookingModal(tourName = "") {
+
+        if (!bookingModal) return;
+
+
+        if (tourNameInput && tourName) {
+
+            if (
+                tourNameInput.tagName === "INPUT" ||
+                tourNameInput.tagName === "SELECT"
+            ) {
+
+                tourNameInput.value =
+                    tourName;
+
+            } else {
+
+                tourNameInput.textContent =
+                    tourName;
+
+            }
+
+        }
+
+
+        bookingModal.classList.add("show");
+        bookingModal.classList.remove("hidden");
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    function closeBookingModal() {
+
+        if (!bookingModal) return;
+
+        bookingModal.classList.remove("show");
+
+        /*
+         * If the HTML uses Tailwind hidden,
+         * keep it hidden.
+         */
+
+        if (
+            bookingModal.classList.contains("modal") ||
+            bookingModal.classList.contains("booking-modal")
+        ) {
+
+            /* opacity/visibility handled by CSS */
+
+        } else {
+
+            bookingModal.classList.add("hidden");
+
+        }
+
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    /* -----------------------------------------------------
+       BOOK BUTTONS
+    ----------------------------------------------------- */
+
+    bookingButtons.forEach(button => {
+
+        on(button, "click", (event) => {
+
+            event.preventDefault();
+
+
+            const card =
+                button.closest(".tour-card");
+
+
+            let tourName =
+                button.dataset.tour ||
+                button.dataset.name ||
+                "";
+
+
+            if (!tourName && card) {
+
+                tourName =
+                    card.dataset.name ||
+                    card.dataset.tour ||
+                    $(".tour-title", card)?.textContent.trim() ||
+                    $(".text-2xl", card)?.textContent.trim() ||
+                    "Selected Tour";
+
+            }
+
+
+            openBookingModal(tourName);
+
+        });
+
+    });
+
+
+    /* -----------------------------------------------------
+       CLOSE
+    ----------------------------------------------------- */
+
+    on(
+        closeBooking,
+        "click",
+        closeBookingModal
+    );
+
+
+    on(
+        bookingModal,
+        "click",
+        (event) => {
+
+            if (event.target === bookingModal) {
+
+                closeBookingModal();
+
+            }
+
+        }
+    );
+
+
+    on(document, "keydown", (event) => {
+
+        if (
+            event.key === "Escape" &&
+            bookingModal?.classList.contains("show")
+        ) {
+
+            closeBookingModal();
+
+        }
+
+    });
+
+
+    /* -----------------------------------------------------
+       DATE
+    ----------------------------------------------------- */
 
     if (bookingDate) {
 
@@ -1405,131 +1516,1343 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =====================================================
-       19. IMAGE ERROR FALLBACK
-       ===================================================== */
+    /* -----------------------------------------------------
+       BOOKING FORM
+    ----------------------------------------------------- */
 
-    document.querySelectorAll("img").forEach(img => {
+    on(bookingForm, "submit", (event) => {
 
-        img.addEventListener(
-            "error",
+        event.preventDefault();
+
+
+        const name =
+            bookingName?.value.trim() || "";
+
+
+        const email =
+            bookingEmail?.value.trim() || "";
+
+
+        const phone =
+            bookingPhone?.value.trim() || "";
+
+
+        const date =
+            bookingDate?.value || "";
+
+
+        const guests =
+            bookingGuests?.value || "";
+
+
+        /* Required fields */
+
+        if (!name) {
+
+            showToast(
+                "Please enter your name.",
+                "error"
+            );
+
+            bookingName?.focus();
+
+            return;
+
+        }
+
+
+        if (!isValidEmail(email)) {
+
+            showToast(
+                "Please enter a valid email address.",
+                "error"
+            );
+
+            bookingEmail?.focus();
+
+            return;
+
+        }
+
+
+        if (!phone) {
+
+            showToast(
+                "Please enter your phone number.",
+                "error"
+            );
+
+            bookingPhone?.focus();
+
+            return;
+
+        }
+
+
+        if (!date) {
+
+            showToast(
+                "Please select a travel date.",
+                "error"
+            );
+
+            bookingDate?.focus();
+
+            return;
+
+        }
+
+
+        const selectedDate =
+            new Date(date);
+
+
+        const today =
+            new Date();
+
+        today.setHours(0, 0, 0, 0);
+
+
+        if (selectedDate < today) {
+
+            showToast(
+                "Travel date cannot be in the past.",
+                "error"
+            );
+
+            bookingDate?.focus();
+
+            return;
+
+        }
+
+
+        /* Create booking object */
+
+        const booking = {
+
+            id:
+                "booking-" +
+                Date.now(),
+
+            tour:
+                getInputValue(
+                    tourNameInput
+                ) || "Selected Tour",
+
+            name,
+
+            email,
+
+            phone,
+
+            date,
+
+            guests,
+
+            message:
+                bookingMessage?.value.trim() || "",
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        let bookings = [];
+
+        try {
+
+            bookings =
+                JSON.parse(
+                    localStorage.getItem(
+                        "travelBookings"
+                    )
+                ) || [];
+
+        } catch (error) {
+
+            bookings = [];
+
+        }
+
+
+        bookings.push(booking);
+
+
+        localStorage.setItem(
+            "travelBookings",
+            JSON.stringify(bookings)
+        );
+
+
+        /* Success */
+
+        showBookingSuccess(
+            bookingModal,
+            booking
+        );
+
+
+        if (bookingForm) {
+
+            bookingForm.reset();
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   BOOKING SUCCESS
+========================================================= */
+
+function showBookingSuccess(modal, booking) {
+
+    if (!modal) return;
+
+
+    const existing =
+        $("#bookingSuccess");
+
+
+    if (existing) {
+
+        existing.innerHTML = `
+
+            <div class="text-center py-6">
+
+                <div
+                    class="w-16 h-16 mx-auto
+                           rounded-full
+                           bg-green-100
+                           text-green-600
+                           flex items-center
+                           justify-center
+                           text-3xl">
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+                <h3
+                    class="text-2xl
+                           font-extrabold
+                           mt-5">
+
+                    Booking Request Sent!
+
+                </h3>
+
+                <p
+                    class="text-gray-500
+                           mt-3">
+
+                    Thank you, ${escapeHTML(booking.name)}.
+                    We received your booking request.
+
+                </p>
+
+                <button
+                    type="button"
+                    id="successCloseBtn"
+                    class="mt-6
+                           bg-[#B85C4A]
+                           text-white
+                           px-6 py-3
+                           rounded-full
+                           font-semibold">
+
+                    Done
+
+                </button>
+
+            </div>
+        `;
+
+
+        existing.classList.remove("hidden");
+
+        on(
+            $("#successCloseBtn"),
+            "click",
             () => {
+                modal.classList.remove("show");
+                document.body.style.overflow = "";
+            }
+        );
 
-                img.style.opacity = "0.5";
+        return;
+
+    }
+
+
+    /*
+     * If no success container exists,
+     * use a toast instead.
+     */
+
+    showToast(
+        "Booking request submitted successfully!",
+        "success"
+    );
+
+
+    setTimeout(() => {
+
+        modal.classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    }, 1200);
+
+}
+
+
+/* =========================================================
+   ABOUT PAGE
+========================================================= */
+
+function initAboutPage() {
+
+    initCounters();
+
+    initFAQ();
+
+}
+
+
+/* =========================================================
+   COUNTERS
+========================================================= */
+
+function initCounters() {
+
+    const counters =
+        $$("[data-counter], .counter");
+
+    if (!counters.length) return;
+
+
+    let started = false;
+
+
+    const animateCounters = () => {
+
+        if (started) return;
+
+        const first =
+            counters[0];
+
+
+        if (!first) return;
+
+
+        const rect =
+            first.getBoundingClientRect();
+
+
+        if (rect.top > window.innerHeight) {
+            return;
+        }
+
+
+        started = true;
+
+
+        counters.forEach(counter => {
+
+            const target =
+                parseInt(
+                    counter.dataset.counter ||
+                    counter.dataset.target ||
+                    counter.textContent.replace(/\D/g, "") ||
+                    "0",
+                    10
+                );
+
+
+            const suffix =
+                counter.dataset.suffix ||
+                "";
+
+
+            const duration = 1500;
+
+            const startTime =
+                performance.now();
+
+
+            function update(time) {
+
+                const progress =
+                    Math.min(
+                        (time - startTime) /
+                        duration,
+                        1
+                    );
+
+
+                const eased =
+                    1 -
+                    Math.pow(
+                        1 - progress,
+                        3
+                    );
+
+
+                const current =
+                    Math.floor(
+                        target * eased
+                    );
+
+
+                counter.textContent =
+                    current + suffix;
+
+
+                if (progress < 1) {
+
+                    requestAnimationFrame(update);
+
+                } else {
+
+                    counter.textContent =
+                        target + suffix;
+
+                }
 
             }
+
+
+            requestAnimationFrame(update);
+
+        });
+
+    };
+
+
+    window.addEventListener(
+        "scroll",
+        animateCounters
+    );
+
+
+    animateCounters();
+
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+function initFAQ() {
+
+    const faqButtons =
+        $$(
+            ".faq-question, " +
+            ".faq-btn, " +
+            "[data-faq]"
+        );
+
+
+    if (!faqButtons.length) return;
+
+
+    faqButtons.forEach(button => {
+
+        on(button, "click", () => {
+
+            const item =
+                button.closest(
+                    ".faq-item"
+                );
+
+
+            if (!item) return;
+
+
+            const answer =
+                $(".faq-answer", item);
+
+
+            if (!answer) return;
+
+
+            const isOpen =
+                answer.classList.contains("show") ||
+                !answer.classList.contains("hidden");
+
+
+            /*
+             * Close other FAQ items.
+             */
+
+            $$(".faq-item").forEach(other => {
+
+                if (other === item) return;
+
+
+                const otherAnswer =
+                    $(".faq-answer", other);
+
+
+                if (otherAnswer) {
+
+                    otherAnswer.classList.remove(
+                        "show"
+                    );
+
+                    otherAnswer.classList.add(
+                        "hidden"
+                    );
+
+                }
+
+
+                const otherIcon =
+                    $(".faq-icon", other) ||
+                    $("i", $(".faq-question", other) || {});
+
+
+                if (otherIcon) {
+
+                    otherIcon.style.transform =
+                        "rotate(0deg)";
+
+                }
+
+            });
+
+
+            if (isOpen) {
+
+                answer.classList.remove("show");
+                answer.classList.add("hidden");
+
+            } else {
+
+                answer.classList.remove("hidden");
+                answer.classList.add("show");
+
+            }
+
+
+            const icon =
+                $(".faq-icon", item);
+
+
+            if (icon) {
+
+                icon.style.transform =
+                    isOpen ?
+                        "rotate(0deg)" :
+                        "rotate(180deg)";
+
+            }
+
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   CONTACT PAGE
+========================================================= */
+
+function initContactPage() {
+
+    const contactForm =
+        $("#contactForm");
+
+
+    if (!contactForm) return;
+
+
+    const nameInput =
+        $("#contactName") ||
+        $("#name");
+
+
+    const emailInput =
+        $("#contactEmail") ||
+        $("#email");
+
+
+    const phoneInput =
+        $("#contactPhone") ||
+        $("#phone");
+
+
+    const subjectInput =
+        $("#contactSubject") ||
+        $("#subject");
+
+
+    const messageInput =
+        $("#contactMessage") ||
+        $("#message");
+
+
+    /* -----------------------------------------------------
+       EMAIL VALIDATION
+    ----------------------------------------------------- */
+
+    on(
+        emailInput,
+        "blur",
+        () => {
+
+            if (
+                emailInput.value.trim() &&
+                !isValidEmail(
+                    emailInput.value.trim()
+                )
+            ) {
+
+                setFieldError(
+                    emailInput,
+                    "Please enter a valid email."
+                );
+
+            } else {
+
+                clearFieldError(emailInput);
+
+            }
+
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       FORM SUBMIT
+    ----------------------------------------------------- */
+
+    on(contactForm, "submit", (event) => {
+
+        event.preventDefault();
+
+
+        const name =
+            nameInput?.value.trim() || "";
+
+
+        const email =
+            emailInput?.value.trim() || "";
+
+
+        const phone =
+            phoneInput?.value.trim() || "";
+
+
+        const subject =
+            subjectInput?.value.trim() || "";
+
+
+        const message =
+            messageInput?.value.trim() || "";
+
+
+        /* Clear old errors */
+
+        [
+            nameInput,
+            emailInput,
+            phoneInput,
+            subjectInput,
+            messageInput
+        ].forEach(clearFieldError);
+
+
+        let valid = true;
+
+
+        if (!name) {
+
+            setFieldError(
+                nameInput,
+                "Please enter your name."
+            );
+
+            valid = false;
+
+        }
+
+
+        if (!isValidEmail(email)) {
+
+            setFieldError(
+                emailInput,
+                "Please enter a valid email."
+            );
+
+            valid = false;
+
+        }
+
+
+        if (
+            phoneInput &&
+            !phone
+        ) {
+
+            setFieldError(
+                phoneInput,
+                "Please enter your phone number."
+            );
+
+            valid = false;
+
+        }
+
+
+        if (
+            subjectInput &&
+            !subject
+        ) {
+
+            setFieldError(
+                subjectInput,
+                "Please enter a subject."
+            );
+
+            valid = false;
+
+        }
+
+
+        if (!message) {
+
+            setFieldError(
+                messageInput,
+                "Please enter your message."
+            );
+
+            valid = false;
+
+        }
+
+
+        if (!valid) {
+
+            showToast(
+                "Please fix the highlighted fields.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /* Save message locally */
+
+        const contactMessage = {
+
+            id:
+                "message-" +
+                Date.now(),
+
+            name,
+
+            email,
+
+            phone,
+
+            subject,
+
+            message,
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        let messages = [];
+
+        try {
+
+            messages =
+                JSON.parse(
+                    localStorage.getItem(
+                        "contactMessages"
+                    )
+                ) || [];
+
+        } catch (error) {
+
+            messages = [];
+
+        }
+
+
+        messages.push(contactMessage);
+
+
+        localStorage.setItem(
+            "contactMessages",
+            JSON.stringify(messages)
+        );
+
+
+        /* Success UI */
+
+        showContactSuccess(
+            contactForm
+        );
+
+
+        contactForm.reset();
+
+    });
+
+}
+
+
+/* =========================================================
+   CONTACT SUCCESS
+========================================================= */
+
+function showContactSuccess(form) {
+
+    if (!form) return;
+
+
+    const successBox =
+        $("#contactSuccess");
+
+
+    if (successBox) {
+
+        successBox.classList.remove("hidden");
+
+        successBox.innerHTML = `
+
+            <div
+                class="rounded-xl
+                       bg-green-50
+                       border border-green-200
+                       p-5">
+
+                <div class="flex gap-3">
+
+                    <div
+                        class="text-green-600
+                               text-xl">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3
+                            class="font-bold
+                                   text-green-800">
+
+                            Message Sent Successfully!
+
+                        </h3>
+
+                        <p
+                            class="text-green-700
+                                   text-sm
+                                   mt-1">
+
+                            Thank you for contacting us.
+                            We will get back to you soon.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        setTimeout(() => {
+
+            successBox.classList.add("hidden");
+
+        }, 6000);
+
+
+        return;
+
+    }
+
+
+    showToast(
+        "Your message has been sent successfully!",
+        "success"
+    );
+
+}
+
+
+/* =========================================================
+   GLOBAL BUTTON EFFECTS
+========================================================= */
+
+function initGlobalButtons() {
+
+    /*
+     * Add a small click feedback to buttons
+     * without interfering with navigation,
+     * forms, modals or links.
+     */
+
+    $$("button").forEach(button => {
+
+        on(button, "mousedown", () => {
+
+            button.classList.add(
+                "scale-[0.98]"
+            );
+
+        });
+
+
+        on(button, "mouseup", () => {
+
+            button.classList.remove(
+                "scale-[0.98]"
+            );
+
+        });
+
+
+        on(button, "mouseleave", () => {
+
+            button.classList.remove(
+                "scale-[0.98]"
+            );
+
+        });
+
+    });
+
+
+    /*
+     * Smooth scrolling for internal anchors.
+     */
+
+    $$('a[href^="#"]').forEach(link => {
+
+        on(link, "click", (event) => {
+
+            const targetID =
+                link.getAttribute("href");
+
+
+            if (
+                !targetID ||
+                targetID === "#"
+            ) {
+                return;
+            }
+
+
+            const target =
+                $(targetID);
+
+
+            if (!target) return;
+
+
+            event.preventDefault();
+
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   TOAST NOTIFICATION
+========================================================= */
+
+function showToast(
+    message,
+    type = "success"
+) {
+
+    let container =
+        $("#toastContainer");
+
+
+    if (!container) {
+
+        container =
+            document.createElement("div");
+
+        container.id =
+            "toastContainer";
+
+        container.className =
+            "fixed top-24 right-5 z-[9999] flex flex-col gap-3";
+
+        document.body.appendChild(container);
+
+    }
+
+
+    const toast =
+        document.createElement("div");
+
+
+    const isError =
+        type === "error";
+
+
+    toast.className = `
+        flex items-center gap-3
+        min-w-[280px]
+        max-w-[380px]
+        px-5 py-4
+        rounded-xl
+        shadow-xl
+        text-white
+        ${isError ? "bg-red-600" : "bg-green-600"}
+        translate-x-[120%]
+        transition-all
+        duration-300
+    `;
+
+
+    toast.innerHTML = `
+
+        <i class="fa-solid
+            ${isError ? "fa-circle-exclamation" : "fa-circle-check"}
+            text-xl">
+        </i>
+
+        <span class="font-medium">
+            ${escapeHTML(message)}
+        </span>
+
+    `;
+
+
+    container.appendChild(toast);
+
+
+    requestAnimationFrame(() => {
+
+        toast.classList.remove(
+            "translate-x-[120%]"
         );
 
     });
 
 
-    /* =====================================================
-       20. HELPER FUNCTIONS
-       ===================================================== */
+    setTimeout(() => {
 
-    function isValidEmail(email) {
+        toast.classList.add(
+            "translate-x-[120%]"
+        );
 
-        const pattern =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        return pattern.test(
-            email.trim()
+        setTimeout(() => {
+
+            toast.remove();
+
+        }, 300);
+
+    }, 3000);
+
+}
+
+
+/* =========================================================
+   FIELD ERROR
+========================================================= */
+
+function setFieldError(
+    input,
+    message
+) {
+
+    if (!input) return;
+
+
+    input.classList.add(
+        "border-red-500"
+    );
+
+
+    input.classList.remove(
+        "border-gray-200"
+    );
+
+
+    let error =
+        input.parentElement?.querySelector(
+            ".field-error"
+        );
+
+
+    if (!error) {
+
+        error =
+            document.createElement("p");
+
+        error.className =
+            "field-error text-red-500 text-sm mt-1";
+
+        input.parentElement?.appendChild(
+            error
         );
 
     }
 
 
-    function showToast(message, type = "success") {
+    error.textContent =
+        message;
 
-        const oldToast =
-            document.getElementById("siteToast");
-
-
-        if (oldToast) {
-            oldToast.remove();
-        }
+}
 
 
-        const toast =
-            document.createElement("div");
+/* =========================================================
+   CLEAR FIELD ERROR
+========================================================= */
+
+function clearFieldError(input) {
+
+    if (!input) return;
 
 
-        toast.id = "siteToast";
+    input.classList.remove(
+        "border-red-500"
+    );
 
 
-        const icon =
-            type === "success"
-            ? "fa-circle-check"
-            : "fa-circle-exclamation";
+    const error =
+        input.parentElement?.querySelector(
+            ".field-error"
+        );
 
 
-        const bg =
-            type === "success"
-            ? "bg-green-600"
-            : "bg-red-600";
+    if (error) {
+
+        error.remove();
+
+    }
+
+}
 
 
-        toast.className = `
-            fixed
-            top-6
-            right-6
-            z-[9999]
-            ${bg}
-            text-white
-            px-5
-            py-4
-            rounded-xl
-            shadow-2xl
-            flex
-            items-center
-            gap-3
-            max-w-sm
-            animate-pulse
-        `;
+/* =========================================================
+   EMAIL VALIDATION
+========================================================= */
+
+function isValidEmail(email) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(email);
+
+}
 
 
-        toast.innerHTML = `
-            <i class="fa-solid ${icon} text-xl"></i>
-            <span>${message}</span>
-        `;
+/* =========================================================
+   GET INPUT VALUE
+========================================================= */
+
+function getInputValue(element) {
+
+    if (!element) return "";
 
 
-        document.body.appendChild(toast);
+    if (
+        element.tagName === "INPUT" ||
+        element.tagName === "SELECT" ||
+        element.tagName === "TEXTAREA"
+    ) {
 
-
-        setTimeout(() => {
-
-            toast.style.opacity = "0";
-            toast.style.transform =
-                "translateY(-10px)";
-
-            toast.style.transition =
-                "all 0.3s ease";
-
-
-            setTimeout(() => {
-
-                toast.remove();
-
-            }, 300);
-
-        }, 3000);
+        return element.value;
 
     }
 
 
-    /* =====================================================
-       21. CONSOLE SUCCESS MESSAGE
-       ===================================================== */
+    return element.textContent.trim();
 
-    console.log(
-        "%c Wanderly Tour & Travel ",
-        "background:#4f46e5;color:white;font-size:16px;font-weight:bold;padding:8px;"
-    );
+}
 
-    console.log(
-        "Website JavaScript loaded successfully."
-    );
 
-});
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   LOCAL STORAGE HELPERS
+========================================================= */
+
+window.TravelLabib = {
+
+    getBookings() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    "travelBookings"
+                )
+            ) || [];
+
+        } catch (error) {
+
+            return [];
+
+        }
+
+    },
+
+
+    getFavorites() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    "favoriteDestinations"
+                )
+            ) || [];
+
+        } catch (error) {
+
+            return [];
+
+        }
+
+    },
+
+
+    getMessages() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    "contactMessages"
+                )
+            ) || [];
+
+        } catch (error) {
+
+            return [];
+
+        }
+
+    },
+
+
+    clearBookings() {
+
+        localStorage.removeItem(
+            "travelBookings"
+        );
+
+    },
+
+
+    clearFavorites() {
+
+        localStorage.removeItem(
+            "favoriteDestinations"
+        );
+
+    },
+
+
+    clearMessages() {
+
+        localStorage.removeItem(
+            "contactMessages"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   WINDOW RESIZE
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        /*
+         * Close mobile menu when switching
+         * to desktop.
+         */
+
+        if (window.innerWidth >= 768) {
+
+            const menu =
+                $("#mobileMenu");
+
+            const button =
+                $("#menuBtn");
+
+
+            if (menu) {
+
+                menu.classList.remove(
+                    "show"
+                );
+
+            }
+
+
+            if (button) {
+
+                button.innerHTML =
+                    '<i class="fa-solid fa-bars"></i>';
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   FINAL STATUS
+========================================================= */
+
+console.log(
+    "Travel With Labib — Global script initialized."
+);
 

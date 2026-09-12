@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Contact Us | Wanderly Tours</title>
+    <title>Travel With Labib | Explore Amazing Tours</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,15 +13,21 @@
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
+        :root {
+            --brand: #B85C4A;
+            --brand-dark: #96483A;
+            --brand-light: #E8A493;
+            --brand-soft: #F3DED8;
+            --cream: #FBF7F2;
+            --gold: #C99532;
+        }
 
         * {
             scroll-behavior: smooth;
@@ -29,6 +35,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
+            background: var(--cream);
         }
 
         .navbar {
@@ -36,79 +43,106 @@
         }
 
         .navbar.scrolled {
-            background: rgba(255,255,255,0.97);
+            background: rgba(255, 255, 255, 0.97);
             box-shadow: 0 5px 25px rgba(0,0,0,0.08);
         }
 
-        .contact-hero {
-            min-height: 470px;
-
+        .hero {
+            min-height: 500px;
             background:
                 linear-gradient(
-                    rgba(0,0,0,0.45),
-                    rgba(0,0,0,0.60)
+                    rgba(31, 24, 21, 0.45),
+                    rgba(31, 24, 21, 0.58)
                 ),
-
-                url("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=2000&q=85")
+                url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000&q=85")
                 center/cover no-repeat;
         }
 
-        .contact-card {
-            transition: all 0.3s ease;
+        .tour-card {
+            transition: all 0.35s ease;
         }
 
-        .contact-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.10);
+        .tour-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(60, 40, 30, 0.13);
         }
 
-        .contact-input {
-            transition: all 0.2s ease;
+        .tour-image {
+            transition: transform 0.5s ease;
         }
 
-        .contact-input:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+        .tour-card:hover .tour-image {
+            transform: scale(1.08);
         }
 
-        .submit-btn {
+        .filter-btn {
             transition: all 0.25s ease;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
+        .filter-btn.active {
+            background: var(--brand);
+            color: white;
+            border-color: var(--brand);
         }
 
-        .success-box {
-            animation: successIn 0.3s ease;
+        .filter-btn:hover:not(.active) {
+            border-color: var(--brand);
+            color: var(--brand);
+            background: #fff8f5;
         }
 
-        @keyframes successIn {
+        .modal {
+            backdrop-filter: blur(5px);
+        }
 
+        .modal-content {
+            animation: modalIn 0.25s ease;
+        }
+
+        @keyframes modalIn {
             from {
                 opacity: 0;
-                transform: translateY(15px);
+                transform: translateY(30px) scale(0.97);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
+        }
 
+        .book-btn {
+            transition: all 0.25s ease;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
         }
 
         #backTop {
             transition: all 0.3s ease;
         }
 
-    </style>
+        .brand-text {
+            color: var(--brand);
+        }
 
+        .brand-bg {
+            background: var(--brand);
+        }
+
+        .brand-bg:hover {
+            background: var(--brand-dark);
+        }
+
+        .brand-focus:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 3px rgba(184, 92, 74, 0.14);
+        }
+    </style>
 </head>
 
-
-<body class="bg-gray-50 text-gray-800">
-
+<body class="bg-[#FBF7F2] text-stone-800">
 
 <!-- =====================================================
      NAVBAR
@@ -121,75 +155,50 @@
         <div class="h-20 flex items-center justify-between">
 
             <!-- Logo -->
-
             <a href="index.html"
-               class="flex items-center gap-2 text-2xl font-extrabold text-blue-600">
+               class="flex items-center gap-2 text-2xl font-extrabold brand-text">
 
                 <i class="fa-solid fa-earth-americas"></i>
 
                 <span>Travel With Labib</span>
-
             </a>
 
-
             <!-- Desktop Menu -->
-
             <div class="hidden lg:flex items-center gap-8">
 
                 <a href="index.html"
-                   class="text-gray-600 hover:text-blue-600 font-medium transition">
-
+                   class="text-gray-600 hover:text-[#B85C4A] font-medium transition">
                     Home
-
                 </a>
-
 
                 <a href="destinations.html"
-                   class="text-gray-600 hover:text-blue-600 font-medium transition">
-
+                   class="text-gray-600 hover:text-[#B85C4A] font-medium transition">
                     Destinations
-
                 </a>
-
 
                 <a href="tours.html"
-                   class="text-gray-600 hover:text-blue-600 font-medium transition">
-
+                   class="text-[#B85C4A] font-semibold">
                     Tours
-
                 </a>
-
 
                 <a href="about.html"
-                   class="text-gray-600 hover:text-blue-600 font-medium transition">
-
+                   class="text-gray-600 hover:text-[#B85C4A] font-medium transition">
                     About
-
                 </a>
 
-
                 <a href="contact.html"
-                   class="text-blue-600 font-semibold">
-
+                   class="text-gray-600 hover:text-[#B85C4A] font-medium transition">
                     Contact
-
                 </a>
 
-
                 <a href="contact.html"
-                   class="bg-blue-600 hover:bg-blue-700
-                          text-white px-5 py-3 rounded-full
-                          font-semibold transition">
-
+                   class="bg-[#B85C4A] hover:bg-[#96483A] text-white px-5 py-3 rounded-full font-semibold transition">
                     Contact Us
-
                 </a>
 
             </div>
 
-
-            <!-- Mobile Menu Button -->
-
+            <!-- Mobile Button -->
             <button id="menuBtn"
                     class="lg:hidden text-2xl text-gray-700"
                     aria-label="Open menu">
@@ -200,59 +209,41 @@
 
         </div>
 
-
         <!-- Mobile Menu -->
-
         <div id="mobileMenu"
              class="hidden lg:hidden pb-5">
 
             <div class="flex flex-col gap-4">
 
                 <a href="index.html"
-                   class="py-2 hover:text-blue-600">
-
+                   class="py-2 hover:text-[#B85C4A]">
                     Home
-
                 </a>
-
 
                 <a href="destinations.html"
-                   class="py-2 hover:text-blue-600">
-
+                   class="py-2 hover:text-[#B85C4A]">
                     Destinations
-
                 </a>
-
 
                 <a href="tours.html"
-                   class="py-2 hover:text-blue-600">
-
+                   class="py-2 text-[#B85C4A] font-semibold">
                     Tours
-
                 </a>
-
 
                 <a href="about.html"
-                   class="py-2 hover:text-blue-600">
-
+                   class="py-2 hover:text-[#B85C4A]">
                     About
-
                 </a>
 
-
                 <a href="contact.html"
-                   class="py-2 text-blue-600 font-semibold">
-
+                   class="py-2 hover:text-[#B85C4A]">
                     Contact
-
                 </a>
 
             </div>
-
         </div>
 
     </div>
-
 </nav>
 
 
@@ -260,33 +251,25 @@
      HERO
 ===================================================== -->
 
-<section class="contact-hero flex items-center justify-center
-                text-white text-center pt-20">
+<section class="hero flex items-center justify-center text-center text-white pt-20">
 
     <div class="max-w-4xl px-5">
 
-        <span class="inline-block bg-white/20 backdrop-blur-md
+        <span class="inline-block bg-[#B85C4A]/80 backdrop-blur-sm
                      px-5 py-2 rounded-full text-sm font-semibold mb-6">
 
-            <i class="fa-solid fa-headset mr-2"></i>
-
-            We're Here To Help
+            <i class="fa-solid fa-compass mr-2"></i>
+            Discover Your Next Adventure
 
         </span>
 
-
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-6">
-
-            Contact Us
-
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+            Find Your Perfect Tour
         </h1>
 
-
         <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
-
-            Have a question, need help planning a trip,
-            or simply want to say hello? We'd love to hear from you.
-
+            Explore unforgettable destinations, exciting adventures
+            and carefully designed travel experiences.
         </p>
 
     </div>
@@ -295,127 +278,73 @@
 
 
 <!-- =====================================================
-     CONTACT INFO
+     SEARCH + FILTER
 ===================================================== -->
 
-<section class="py-16 bg-white">
+<section class="py-14 bg-white">
 
     <div class="max-w-7xl mx-auto px-5 lg:px-8">
 
-        <div class="grid md:grid-cols-3 gap-7">
+        <!-- Search -->
+        <div class="max-w-2xl mx-auto mb-10">
 
+            <div class="relative">
 
-            <!-- Phone -->
+                <i class="fa-solid fa-magnifying-glass
+                          absolute left-5 top-1/2
+                          -translate-y-1/2 text-gray-400"></i>
 
-            <div class="contact-card bg-gray-50 rounded-3xl p-8 text-center">
-
-                <div class="w-16 h-16 mx-auto rounded-2xl
-                            bg-blue-100 text-blue-600
-                            flex items-center justify-center
-                            text-2xl mb-5">
-
-                    <i class="fa-solid fa-phone"></i>
-
-                </div>
-
-
-                <h3 class="text-xl font-bold mb-2">
-
-                    Call Us
-
-                </h3>
-
-
-                <p class="text-gray-500 mb-3">
-
-                    Mon - Sat, 9AM - 8PM
-
-                </p>
-
-
-                <a href="tel:+1234567890"
-                   class="text-blue-600 font-semibold">
-
-                    +1 234 567 890
-
-                </a>
+                <input
+                    type="text"
+                    id="tourSearch"
+                    placeholder="Search tours..."
+                    class="brand-focus w-full pl-14 pr-5 py-4 rounded-2xl
+                           border border-gray-200 focus:outline-none
+                           shadow-sm transition"
+                >
 
             </div>
 
-
-            <!-- Email -->
-
-            <div class="contact-card bg-gray-50 rounded-3xl p-8 text-center">
-
-                <div class="w-16 h-16 mx-auto rounded-2xl
-                            bg-green-100 text-green-600
-                            flex items-center justify-center
-                            text-2xl mb-5">
-
-                    <i class="fa-solid fa-envelope"></i>
-
-                </div>
+        </div>
 
 
-                <h3 class="text-xl font-bold mb-2">
+        <!-- Filters -->
+        <div class="flex flex-wrap justify-center gap-3">
 
-                    Email Us
+            <button
+                class="filter-btn active border border-gray-300
+                       px-5 py-2.5 rounded-full font-medium"
+                data-category="all">
+                All Tours
+            </button>
 
-                </h3>
+            <button
+                class="filter-btn border border-gray-300
+                       px-5 py-2.5 rounded-full font-medium"
+                data-category="adventure">
+                Adventure
+            </button>
 
+            <button
+                class="filter-btn border border-gray-300
+                       px-5 py-2.5 rounded-full font-medium"
+                data-category="beach">
+                Beach
+            </button>
 
-                <p class="text-gray-500 mb-3">
+            <button
+                class="filter-btn border border-gray-300
+                       px-5 py-2.5 rounded-full font-medium"
+                data-category="city">
+                City
+            </button>
 
-                    We'll reply within 24 hours
-
-                </p>
-
-
-                <a href="mailto:hello@wanderly.com"
-                   class="text-blue-600 font-semibold">
-
-                    hello@wanderly.com
-
-                </a>
-
-            </div>
-
-
-            <!-- Location -->
-
-            <div class="contact-card bg-gray-50 rounded-3xl p-8 text-center">
-
-                <div class="w-16 h-16 mx-auto rounded-2xl
-                            bg-purple-100 text-purple-600
-                            flex items-center justify-center
-                            text-2xl mb-5">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                </div>
-
-
-                <h3 class="text-xl font-bold mb-2">
-
-                    Visit Us
-
-                </h3>
-
-
-                <p class="text-gray-500 mb-3">
-
-                    Our travel office
-
-                </p>
-
-
-                <span class="text-blue-600 font-semibold">
-
-                    123 Travel Street, City
-
-                </span>
-
-            </div>
+            <button
+                class="filter-btn border border-gray-300
+                       px-5 py-2.5 rounded-full font-medium"
+                data-category="nature">
+                Nature
+            </button>
 
         </div>
 
@@ -425,516 +354,559 @@
 
 
 <!-- =====================================================
-     CONTACT FORM + MAP
+     TOURS
 ===================================================== -->
 
-<section class="py-20">
+<section class="py-16">
 
     <div class="max-w-7xl mx-auto px-5 lg:px-8">
 
-        <div class="grid lg:grid-cols-2 gap-10">
-
-
-            <!-- CONTACT FORM -->
-
-            <div class="bg-white rounded-3xl shadow-sm p-7 md:p-10">
-
-                <div class="mb-8">
-
-                    <span class="text-blue-600 font-bold uppercase
-                                 tracking-wider text-sm">
-
-                        Send A Message
-
-                    </span>
-
-
-                    <h2 class="text-3xl font-extrabold mt-3">
-
-                        Let's Talk About Your Trip
-
-                    </h2>
-
-
-                    <p class="text-gray-500 mt-3">
-
-                        Fill out the form and our travel team
-                        will get back to you soon.
-
-                    </p>
-
-                </div>
-
-
-                <!-- Form -->
-
-                <form id="contactForm"
-                      class="space-y-5"
-                      novalidate>
-
-
-                    <!-- Name -->
-
-                    <div>
-
-                        <label for="contactName"
-                               class="block font-semibold mb-2">
-
-                            Full Name
-
-                        </label>
-
-
-                        <input
-                            id="contactName"
-                            type="text"
-                            placeholder="Enter your full name"
-                            class="contact-input w-full px-4 py-3.5
-                                   border border-gray-200 rounded-xl">
-
-                        <p id="nameError"
-                           class="hidden text-red-500 text-sm mt-2">
-
-                            Please enter your name.
-
-                        </p>
-
-                    </div>
-
-
-                    <!-- Email -->
-
-                    <div>
-
-                        <label for="contactEmail"
-                               class="block font-semibold mb-2">
-
-                            Email Address
-
-                        </label>
-
-
-                        <input
-                            id="contactEmail"
-                            type="email"
-                            placeholder="Enter your email"
-                            class="contact-input w-full px-4 py-3.5
-                                   border border-gray-200 rounded-xl">
-
-                        <p id="emailError"
-                           class="hidden text-red-500 text-sm mt-2">
-
-                            Please enter a valid email address.
-
-                        </p>
-
-                    </div>
-
-
-                    <!-- Phone -->
-
-                    <div>
-
-                        <label for="contactPhone"
-                               class="block font-semibold mb-2">
-
-                            Phone Number
-
-                        </label>
-
-
-                        <input
-                            id="contactPhone"
-                            type="tel"
-                            placeholder="Enter your phone number"
-                            class="contact-input w-full px-4 py-3.5
-                                   border border-gray-200 rounded-xl">
-
-                    </div>
-
-
-                    <!-- Subject -->
-
-                    <div>
-
-                        <label for="contactSubject"
-                               class="block font-semibold mb-2">
-
-                            Subject
-
-                        </label>
-
-
-                        <select
-                            id="contactSubject"
-                            class="contact-input w-full px-4 py-3.5
-                                   border border-gray-200 rounded-xl">
-
-                            <option value="">
-                                Select a subject
-                            </option>
-
-                            <option value="tour">
-                                Tour Information
-                            </option>
-
-                            <option value="booking">
-                                Booking Help
-                            </option>
-
-                            <option value="custom">
-                                Custom Trip
-                            </option>
-
-                            <option value="other">
-                                Other
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- Message -->
-
-                    <div>
-
-                        <label for="contactMessage"
-                               class="block font-semibold mb-2">
-
-                            Message
-
-                        </label>
-
-
-                        <textarea
-                            id="contactMessage"
-                            rows="5"
-                            placeholder="Tell us how we can help..."
-                            class="contact-input w-full px-4 py-3.5
-                                   border border-gray-200 rounded-xl resize-none"></textarea>
-
-
-                        <p id="messageError"
-                           class="hidden text-red-500 text-sm mt-2">
-
-                            Please enter your message.
-
-                        </p>
-
-                    </div>
-
-
-                    <!-- Submit -->
-
-                    <button
-                        type="submit"
-                        class="submit-btn w-full bg-blue-600
-                               hover:bg-blue-700 text-white
-                               py-4 rounded-xl font-bold">
-
-                        <i class="fa-solid fa-paper-plane mr-2"></i>
-
-                        Send Message
-
-                    </button>
-
-                </form>
-
-
-                <!-- Success Message -->
-
-                <div id="contactSuccess"
-                     class="success-box hidden text-center py-10">
-
-                    <div class="w-20 h-20 mx-auto rounded-full
-                                bg-green-100 text-green-600
-                                flex items-center justify-center
-                                text-4xl mb-6">
-
-                        <i class="fa-solid fa-check"></i>
-
-                    </div>
-
-
-                    <h3 class="text-2xl font-extrabold">
-
-                        Message Sent Successfully!
-
-                    </h3>
-
-
-                    <p class="text-gray-500 mt-3">
-
-                        Thank you for contacting Wanderly.
-                        Our team will get back to you soon.
-
-                    </p>
-
-
-                    <button
-                        id="newMessageBtn"
-                        class="mt-6 px-6 py-3 rounded-xl
-                               bg-blue-600 text-white font-semibold">
-
-                        Send Another Message
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- MAP / OFFICE -->
-
-            <div class="space-y-6">
-
-
-                <!-- Map -->
-
-                <div class="bg-white rounded-3xl overflow-hidden
-                            shadow-sm">
-
-                    <div class="h-[390px]">
-
-                        <iframe
-                            src="https://www.google.com/maps?q=Dhaka%2C%20Bangladesh&output=embed"
-                            width="100%"
-                            height="100%"
-                            style="border:0;"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Office Hours -->
-
-                <div class="bg-blue-600 text-white rounded-3xl p-8">
-
-                    <div class="flex items-center gap-4 mb-6">
-
-                        <div class="w-14 h-14 rounded-2xl
-                                    bg-white/15
-                                    flex items-center justify-center
-                                    text-2xl">
-
-                            <i class="fa-regular fa-clock"></i>
-
-                        </div>
-
-
-                        <div>
-
-                            <h3 class="text-xl font-bold">
-
-                                Office Hours
-
-                            </h3>
-
-                            <p class="text-blue-100">
-
-                                We're ready to help
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="space-y-4 text-sm">
-
-                        <div class="flex justify-between
-                                    border-b border-white/20 pb-3">
-
-                            <span>Monday - Friday</span>
-
-                            <span class="font-semibold">
-                                9:00 AM - 8:00 PM
-                            </span>
-
-                        </div>
-
-
-                        <div class="flex justify-between
-                                    border-b border-white/20 pb-3">
-
-                            <span>Saturday</span>
-
-                            <span class="font-semibold">
-                                10:00 AM - 6:00 PM
-                            </span>
-
-                        </div>
-
-
-                        <div class="flex justify-between">
-
-                            <span>Sunday</span>
-
-                            <span class="font-semibold">
-                                Closed
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     FAQ
-===================================================== -->
-
-<section class="py-20 bg-white">
-
-    <div class="max-w-4xl mx-auto px-5">
-
+        <!-- Heading -->
         <div class="text-center mb-12">
 
-            <span class="text-blue-600 font-bold uppercase
+            <span class="text-[#B85C4A] font-bold uppercase
                          tracking-wider text-sm">
-
-                FAQ
-
+                Popular Experiences
             </span>
 
-
             <h2 class="text-3xl md:text-4xl font-extrabold mt-3">
-
-                Frequently Asked Questions
-
+                Explore Our Best Tours
             </h2>
+
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">
+                Choose from our handpicked tours and create memories
+                that will last a lifetime.
+            </p>
 
         </div>
 
 
-        <div class="space-y-4">
+        <!-- Tour Grid -->
+        <div id="tourGrid"
+             class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
 
-            <!-- FAQ 1 -->
+            <!-- TOUR 1 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="adventure"
+                 data-title="Swiss Alps Adventure">
 
-            <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                <div class="relative h-64 overflow-hidden">
 
-                <button
-                    class="faq-btn w-full flex items-center
-                           justify-between p-5 text-left font-bold">
+                    <img
+                        src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1000&q=80"
+                        alt="Swiss Alps"
+                        class="tour-image w-full h-full object-cover">
 
-                    <span>
-                        How can I book a tour?
+                    <span class="absolute top-4 left-4 bg-[#B85C4A]
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
+                        Adventure
                     </span>
 
-                    <i class="fa-solid fa-plus"></i>
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
+                        aria-label="Add to favorites">
 
-                </button>
+                        <i class="fa-regular fa-heart"></i>
 
+                    </button>
 
-                <div class="faq-answer hidden px-5 pb-5 text-gray-500 leading-7">
+                </div>
 
-                    You can visit our Tours page, choose your
-                    preferred tour and click the Book Now button.
-                    Then fill out the booking form.
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
+                        Switzerland
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Swiss Alps Adventure
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            7 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            4.9
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
+                                $1,299
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
+                            data-tour="Swiss Alps Adventure">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- FAQ 2 -->
+            <!-- TOUR 2 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="beach"
+                 data-title="Bali Paradise Escape">
 
-            <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                <div class="relative h-64 overflow-hidden">
 
-                <button
-                    class="faq-btn w-full flex items-center
-                           justify-between p-5 text-left font-bold">
+                    <img
+                        src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=80"
+                        alt="Bali"
+                        class="tour-image w-full h-full object-cover">
 
-                    <span>
-                        Can I customize my trip?
+                    <span class="absolute top-4 left-4 bg-[#D9A441]
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
+                        Beach
                     </span>
 
-                    <i class="fa-solid fa-plus"></i>
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
+                        aria-label="Add to favorites">
 
-                </button>
+                        <i class="fa-regular fa-heart"></i>
 
+                    </button>
 
-                <div class="faq-answer hidden px-5 pb-5 text-gray-500 leading-7">
+                </div>
 
-                    Yes. Contact our travel team and tell us
-                    your preferred destination, dates and
-                    travel requirements.
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
+                        Bali, Indonesia
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Bali Paradise Escape
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            5 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            4.8
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
+                                $799
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
+                            data-tour="Bali Paradise Escape">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- FAQ 3 -->
+            <!-- TOUR 3 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="city"
+                 data-title="Dubai Luxury Tour">
 
-            <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                <div class="relative h-64 overflow-hidden">
 
-                <button
-                    class="faq-btn w-full flex items-center
-                           justify-between p-5 text-left font-bold">
+                    <img
+                        src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1000&q=80"
+                        alt="Dubai"
+                        class="tour-image w-full h-full object-cover">
 
-                    <span>
-                        Do you provide travel support?
+                    <span class="absolute top-4 left-4 bg-stone-700
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
+                        City
                     </span>
 
-                    <i class="fa-solid fa-plus"></i>
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
+                        aria-label="Add to favorites">
 
-                </button>
+                        <i class="fa-regular fa-heart"></i>
 
+                    </button>
 
-                <div class="faq-answer hidden px-5 pb-5 text-gray-500 leading-7">
+                </div>
 
-                    Yes. Our team is available to assist you
-                    with general travel planning and tour
-                    information.
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
+                        Dubai, UAE
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Dubai Luxury Tour
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            4 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            4.9
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
+                                $999
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
+                            data-tour="Dubai Luxury Tour">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- FAQ 4 -->
+            <!-- TOUR 4 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="nature"
+                 data-title="Nepal Mountain Trek">
 
-            <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                <div class="relative h-64 overflow-hidden">
 
-                <button
-                    class="faq-btn w-full flex items-center
-                           justify-between p-5 text-left font-bold">
+                    <img
+                        src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=80"
+                        alt="Nepal Mountains"
+                        class="tour-image w-full h-full object-cover">
 
-                    <span>
-                        How quickly will you reply?
+                    <span class="absolute top-4 left-4 bg-[#66755A]
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
+                        Nature
                     </span>
 
-                    <i class="fa-solid fa-plus"></i>
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
+                        aria-label="Add to favorites">
 
-                </button>
+                        <i class="fa-regular fa-heart"></i>
 
+                    </button>
 
-                <div class="faq-answer hidden px-5 pb-5 text-gray-500 leading-7">
+                </div>
 
-                    We aim to respond to inquiries within
-                    24 hours during business days.
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
+                        Nepal
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Nepal Mountain Trek
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            8 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            4.7
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
+                                $1,099
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
+                            data-tour="Nepal Mountain Trek">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
 
                 </div>
 
             </div>
+
+
+            <!-- TOUR 5 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="city"
+                 data-title="Paris City Experience">
+
+                <div class="relative h-64 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1000&q=80"
+                        alt="Paris"
+                        class="tour-image w-full h-full object-cover">
+
+                    <span class="absolute top-4 left-4 bg-stone-700
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
+                        City
+                    </span>
+
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
+                        aria-label="Add to favorites">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
+                        Paris, France
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Paris City Experience
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            5 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            4.8
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
+                                $1,199
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
+                            data-tour="Paris City Experience">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOUR 6 -->
+            <div class="tour-card bg-white rounded-3xl overflow-hidden shadow-md"
+                 data-category="beach"
+                 data-title="Maldives Island Escape">
+
+                <div class="relative h-64 overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1000&q=80"
+                        alt="Maldives"
+                        class="tour-image w-full h-full object-cover">
+
+                    <span class="absolute top-4 left-4 bg-[#D9A441]
+                                 text-white px-3 py-1.5 rounded-full
+                                 text-xs font-bold">
+                        Beach
+                    </span>
+
+                    <button
+                        class="favorite-btn absolute top-4 right-4 w-10 h-10
+                               rounded-full bg-white/90 flex items-center
+                               justify-center text-gray-600
+                               hover:text-red-500"
+                        aria-label="Add to favorites">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <i class="fa-solid fa-location-dot text-[#B85C4A]"></i>
+                        Maldives
+                    </div>
+
+                    <h3 class="text-xl font-bold mb-3">
+                        Maldives Island Escape
+                    </h3>
+
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-5">
+
+                        <span>
+                            <i class="fa-regular fa-clock mr-1"></i>
+                            6 Days
+                        </span>
+
+                        <span class="text-yellow-500">
+                            <i class="fa-solid fa-star"></i>
+                            5.0
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <span class="text-sm text-gray-500">From</span>
+
+                            <p class="text-2xl font-extrabold text-[#B85C4A]">
+                                $1,499
+                            </p>
+                        </div>
+
+                        <button
+                            class="book-tour-btn book-btn
+                                   bg-[#B85C4A] hover:bg-[#96483A]
+                                   text-white px-5 py-3 rounded-xl
+                                   font-semibold"
+                            data-tour="Maldives Island Escape">
+
+                            Book Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- No Results -->
+        <div id="noTourResults"
+             class="hidden text-center py-16">
+
+            <div class="text-6xl text-gray-300 mb-5">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700">
+                No tours found
+            </h3>
+
+            <p class="text-gray-500 mt-2">
+                Try another search or category.
+            </p>
 
         </div>
 
@@ -947,35 +919,27 @@
      CTA
 ===================================================== -->
 
-<section class="py-20 bg-blue-600 text-white">
+<section class="py-20 bg-[#B85C4A] text-white">
 
     <div class="max-w-5xl mx-auto px-5 text-center">
 
         <i class="fa-solid fa-plane-departure text-5xl mb-6"></i>
 
-
-        <h2 class="text-3xl md:text-5xl font-extrabold mb-5">
-
-            Your Next Adventure Starts Here
-
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-5">
+            Ready For Your Next Adventure?
         </h2>
 
-
-        <p class="text-blue-100 max-w-2xl mx-auto mb-8">
-
-            Have a destination in mind?
-            Let's turn your travel dream into reality.
-
+        <p class="text-[#F4D5CD] max-w-2xl mx-auto mb-8">
+            Let us help you plan the perfect journey.
+            Your unforgettable adventure starts here.
         </p>
 
+        <a href="contact.html"
+           class="inline-flex items-center gap-2 bg-white
+                  text-[#B85C4A] px-7 py-3.5 rounded-full
+                  font-bold hover:bg-[#FFF5F1] transition">
 
-        <a href="tours.html"
-           class="inline-flex items-center gap-2
-                  bg-white text-blue-600
-                  px-7 py-3.5 rounded-full
-                  font-bold hover:bg-gray-100 transition">
-
-            Explore Tours
+            Plan My Trip
 
             <i class="fa-solid fa-arrow-right"></i>
 
@@ -990,88 +954,64 @@
      FOOTER
 ===================================================== -->
 
-<footer class="bg-gray-950 text-gray-300">
+<footer class="bg-stone-950 text-gray-300">
 
     <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14">
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
 
-
             <!-- Brand -->
-
             <div>
 
-                <div class="flex items-center gap-2
-                            text-2xl font-extrabold
-                            text-white mb-5">
+                <div class="flex items-center gap-2 text-2xl
+                            font-extrabold text-white mb-5">
 
-                    <i class="fa-solid fa-earth-americas"></i>
+                    <i class="fa-solid fa-earth-americas text-[#B85C4A]"></i>
 
                     Travel With Labib
 
                 </div>
 
-
                 <p class="text-gray-400 leading-7">
-
                     Making your travel dreams come true with
                     unforgettable experiences around the world.
-
                 </p>
 
             </div>
 
 
             <!-- Quick Links -->
-
             <div>
 
                 <h3 class="text-white font-bold text-lg mb-5">
-
                     Quick Links
-
                 </h3>
-
 
                 <div class="space-y-3">
 
                     <a href="index.html"
-                       class="block hover:text-white transition">
-
+                       class="block hover:text-[#E8A493] transition">
                         Home
-
                     </a>
-
 
                     <a href="destinations.html"
-                       class="block hover:text-white transition">
-
+                       class="block hover:text-[#E8A493] transition">
                         Destinations
-
                     </a>
-
 
                     <a href="tours.html"
-                       class="block hover:text-white transition">
-
+                       class="block hover:text-[#E8A493] transition">
                         Tours
-
                     </a>
-
 
                     <a href="about.html"
-                       class="block hover:text-white transition">
-
+                       class="block hover:text-[#E8A493] transition">
                         About
-
                     </a>
 
-
                     <a href="contact.html"
-                       class="block hover:text-white transition">
-
+                       class="block hover:text-[#E8A493] transition">
                         Contact
-
                     </a>
 
                 </div>
@@ -1080,15 +1020,11 @@
 
 
             <!-- Services -->
-
             <div>
 
                 <h3 class="text-white font-bold text-lg mb-5">
-
                     Services
-
                 </h3>
-
 
                 <div class="space-y-3 text-gray-400">
 
@@ -1104,42 +1040,36 @@
 
 
             <!-- Social -->
-
             <div>
 
                 <h3 class="text-white font-bold text-lg mb-5">
-
                     Follow Us
-
                 </h3>
-
 
                 <div class="flex gap-3">
 
                     <a href="#"
                        class="w-11 h-11 rounded-full bg-gray-800
                               flex items-center justify-center
-                              hover:bg-blue-600 transition">
+                              hover:bg-[#B85C4A] transition">
 
                         <i class="fa-brands fa-facebook-f"></i>
 
                     </a>
 
-
                     <a href="#"
                        class="w-11 h-11 rounded-full bg-gray-800
                               flex items-center justify-center
-                              hover:bg-pink-600 transition">
+                              hover:bg-[#B85C4A] transition">
 
                         <i class="fa-brands fa-instagram"></i>
 
                     </a>
 
-
                     <a href="#"
                        class="w-11 h-11 rounded-full bg-gray-800
                               flex items-center justify-center
-                              hover:bg-sky-500 transition">
+                              hover:bg-[#B85C4A] transition">
 
                         <i class="fa-brands fa-twitter"></i>
 
@@ -1165,21 +1095,211 @@
 
 
 <!-- =====================================================
+     BOOKING MODAL
+===================================================== -->
+
+<div id="bookingModal"
+     class="modal hidden fixed inset-0 z-[100]
+            bg-black/60 flex items-center justify-center p-5">
+
+    <div class="modal-content bg-white rounded-3xl w-full max-w-lg
+                max-h-[90vh] overflow-y-auto">
+
+        <!-- Modal Header -->
+        <div class="flex items-center justify-between p-6 border-b">
+
+            <div>
+
+                <span class="text-sm text-[#B85C4A] font-semibold">
+                    Tour Booking
+                </span>
+
+                <h2 id="bookingTourName"
+                    class="text-2xl font-bold mt-1">
+                    Book Your Tour
+                </h2>
+
+            </div>
+
+            <button id="closeBookingModal"
+                    class="w-10 h-10 rounded-full bg-gray-100
+                           hover:bg-gray-200 text-gray-600">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- Form -->
+        <form id="bookingForm"
+              class="p-6 space-y-5">
+
+            <input type="hidden"
+                   id="selectedTour">
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Full Name
+                </label>
+
+                <input
+                    id="customerName"
+                    type="text"
+                    required
+                    placeholder="Enter your name"
+                    class="brand-focus w-full px-4 py-3 border
+                           rounded-xl focus:outline-none transition">
+
+            </div>
+
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Email Address
+                </label>
+
+                <input
+                    id="customerEmail"
+                    type="email"
+                    required
+                    placeholder="Enter your email"
+                    class="brand-focus w-full px-4 py-3 border
+                           rounded-xl focus:outline-none transition">
+
+            </div>
+
+
+            <div class="grid sm:grid-cols-2 gap-4">
+
+                <div>
+
+                    <label class="block font-semibold mb-2">
+                        Travel Date
+                    </label>
+
+                    <input
+                        id="travelDate"
+                        type="date"
+                        required
+                        class="brand-focus w-full px-4 py-3 border
+                               rounded-xl focus:outline-none transition">
+
+                </div>
+
+
+                <div>
+
+                    <label class="block font-semibold mb-2">
+                        Guests
+                    </label>
+
+                    <input
+                        id="guestCount"
+                        type="number"
+                        min="1"
+                        max="20"
+                        value="1"
+                        required
+                        class="brand-focus w-full px-4 py-3 border
+                               rounded-xl focus:outline-none transition">
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <label class="block font-semibold mb-2">
+                    Special Request
+                </label>
+
+                <textarea
+                    id="specialRequest"
+                    rows="3"
+                    placeholder="Any special request?"
+                    class="brand-focus w-full px-4 py-3 border
+                           rounded-xl focus:outline-none transition"></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="w-full bg-[#B85C4A] hover:bg-[#96483A]
+                       text-white py-4 rounded-xl font-bold transition">
+
+                <i class="fa-solid fa-paper-plane mr-2"></i>
+
+                Submit Booking Request
+
+            </button>
+
+        </form>
+
+
+        <!-- Success -->
+        <div id="bookingSuccess"
+             class="hidden p-8 text-center">
+
+            <div class="w-16 h-16 mx-auto rounded-full bg-green-100
+                        text-green-600 flex items-center justify-center
+                        text-3xl mb-5">
+
+                <i class="fa-solid fa-check"></i>
+
+            </div>
+
+            <h3 class="text-2xl font-bold">
+                Booking Request Sent!
+            </h3>
+
+            <p class="text-gray-500 mt-3">
+                Thank you for choosing Travel With Labib.
+                We will contact you shortly.
+            </p>
+
+            <button
+                id="successCloseBtn"
+                class="mt-6 bg-[#B85C4A] hover:bg-[#96483A]
+                       text-white px-6 py-3 rounded-xl
+                       font-semibold transition">
+
+                Done
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
      BACK TO TOP
 ===================================================== -->
 
 <button id="backTop"
         class="hidden fixed bottom-6 right-6 z-40
-               w-12 h-12 rounded-full bg-blue-600
-               hover:bg-blue-700 text-white shadow-lg">
+               w-12 h-12 rounded-full
+               bg-[#B85C4A] hover:bg-[#96483A]
+               text-white shadow-lg">
 
     <i class="fa-solid fa-arrow-up"></i>
 
 </button>
 
 
-<!-- Shared JavaScript -->
-<script src="js/script.js"></script>
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="/script.js"></script>
 
 </body>
 </html>
